@@ -63,7 +63,7 @@ OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 MatrixDraw LeftArmBackCanvas            (xSizeLeftArmBack, ySizeLeftArmBack);
 MatrixDraw LeftArmFrontPartTwoCanvas    (xSizeLeftArmPartTwo, ySizeLeftArmPartTwo);
 MatrixDraw LeftArmFrontPartOneCanvas    (xSizeLeftArmFrontPartOne, ySizeLeftArmFrontPartOne);
-MatrixDraw LeftBackCanvas               (xSizeLeftArmBack, ySizeLeftArmBack);
+MatrixDraw LeftBackCanvas               (xSizeLeftBack, ySizeLeftBack);
 MatrixDraw LeftChestCanvas              (xSizeLeftChest, ySizeLeftChest);
 MatrixDraw RightArmBackCanvas           (xSizeRightArmBack, ySizeRightArmBack);
 MatrixDraw RightArmFrontPartOneCanvas   (xSizeRightArmPartOne, ySizeRightArmPartOne);
@@ -256,6 +256,19 @@ void setup() {
 #define WHITE  0x101010
 */
 
+void DrawWings()
+{
+  for(int i = 0; i < 13; i++)
+  {
+    RightBackCanvas.DrawLine(0,ySizeRightBack/2, xSizeRightBack-1, i, 1);
+    LeftBackCanvas.DrawLine(0, ySizeLeftBack/2, xSizeLeftBack-1, i, 1);
+    DrawAllMatrices();
+    RightBackCanvas.ClearMatrix();
+    LeftBackCanvas.ClearMatrix();
+  }
+  
+}
+
 
 void loop() {
   //int microsec = 0;  // change them all in 2 seconds
@@ -286,6 +299,7 @@ void loop() {
 
 
   DrawAllMatrices();
+  DrawWings();
   Serial.println("Good to go");
   delay(100);
 
