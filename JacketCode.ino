@@ -210,9 +210,6 @@ void DrawRightChestMatrix()
 
 void DrawAllMatrices()
 {
-  delay(10);
-  Serial.println("Start Drawing");
-  delay(10);
 
   DrawLeftArmBackMatrix();
   DrawLeftArmFrontPartTwoMatrix();
@@ -227,15 +224,7 @@ void DrawAllMatrices()
   DrawRightBackMatrix();
   DrawRightChestMatrix();
 
-  delay(10);
-  Serial.println("About to show");
-  delay(10);
-
   leds.show();
-
-  delay(10);
-  Serial.println("Done Showing");
-  delay(10);
 }
 
 void setup() {
@@ -298,7 +287,7 @@ void loop() {
 
   DrawAllMatrices();
   Serial.println("Good to go");
-  delay(1000);
+  delay(100);
 
 }
 
