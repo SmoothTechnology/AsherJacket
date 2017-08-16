@@ -60,27 +60,27 @@ const int config = WS2811_GRB | WS2811_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 
-//MatrixDraw LeftArmBackCanvas            (xSizeLeftArmBack, ySizeLeftArmBack);
-//MatrixDraw LeftArmFrontPartTwoCanvas    (xSizeLeftArmPartTwo, ySizeLeftArmPartTwo);
-//MatrixDraw LeftArmFrontPartOneCanvas    (xSizeLeftArmFrontPartOne, ySizeLeftArmFrontPartOne);
+MatrixDraw LeftArmBackCanvas            (xSizeLeftArmBack, ySizeLeftArmBack);
+MatrixDraw LeftArmFrontPartTwoCanvas    (xSizeLeftArmPartTwo, ySizeLeftArmPartTwo);
+MatrixDraw LeftArmFrontPartOneCanvas    (xSizeLeftArmFrontPartOne, ySizeLeftArmFrontPartOne);
 MatrixDraw LeftBackCanvas               (xSizeLeftArmBack, ySizeLeftArmBack);
 MatrixDraw LeftChestCanvas              (xSizeLeftChest, ySizeLeftChest);
-//MatrixDraw RightArmBackCanvas           (xSizeRightArmBack, ySizeRightArmBack);
-//MatrixDraw RightArmFrontPartOneCanvas   (xSizeRightArmPartOne, ySizeRightArmPartOne);
-//MatrixDraw RightArmFrontPartTwoCanvas   (xSizeRightArmPartTwo, ySizeRightArmPartTwo);
+MatrixDraw RightArmBackCanvas           (xSizeRightArmBack, ySizeRightArmBack);
+MatrixDraw RightArmFrontPartOneCanvas   (xSizeRightArmPartOne, ySizeRightArmPartOne);
+MatrixDraw RightArmFrontPartTwoCanvas   (xSizeRightArmPartTwo, ySizeRightArmPartTwo);
 MatrixDraw RightBackCanvas              (xSizeRightBack, ySizeRightBack);
 MatrixDraw RightChestCanvas             (xSizeRightChest, ySizeRightChest);
 
 void InitializeMatrices()
 {
-  //LeftArmBackCanvas.ClearMatrix();      
-  //LeftArmFrontPartTwoCanvas.ClearMatrix();  
-  //LeftArmFrontPartOneCanvas.ClearMatrix();   
+  LeftArmBackCanvas.ClearMatrix();      
+  LeftArmFrontPartTwoCanvas.ClearMatrix();  
+  LeftArmFrontPartOneCanvas.ClearMatrix();   
   LeftBackCanvas.ClearMatrix();              
   LeftChestCanvas.ClearMatrix();             
-  //RightArmBackCanvas.ClearMatrix();          
-  //RightArmFrontPartOneCanvas.ClearMatrix();  
-  //RightArmFrontPartTwoCanvas.ClearMatrix();  
+  RightArmBackCanvas.ClearMatrix();          
+  RightArmFrontPartOneCanvas.ClearMatrix();  
+  RightArmFrontPartTwoCanvas.ClearMatrix();  
   RightBackCanvas.ClearMatrix();             
   RightChestCanvas.ClearMatrix();            
 }
@@ -95,47 +95,47 @@ void InitializeMatrices()
 
 void InitializeAllMaps()
 {
-  //InitializeLeftArmBackMap();
-  //InitializeLeftArmFrontPartTwoMap();
-  //InitializeLeftArmFrontPartOneMap();
+  InitializeLeftArmBackMap();
+  InitializeLeftArmFrontPartTwoMap();
+  InitializeLeftArmFrontPartOneMap();
   InitializeLeftBackMap();
   InitializeLeftChestMap();
-  //InitializeRightArmMap();
-  //InitializeRightArmPartOneMap();
-  //InitializeRightArmPartTwoMap();
+  InitializeRightArmMap();
+  InitializeRightArmPartOneMap();
+  InitializeRightArmPartTwoMap();
   InitializeRightBackMap();
   InitializeRightChestMap();
 }
 
-//void DrawLeftArmBackMatrix()
-//{
-//  for(int i = minLEDLeftArmBack; i < maxLEDLeftArmBack; i++)
-//  {
-//    LEDPos curPos = LeftArmBackMap[i - minLEDLeftArmBack];
-//    int value = LeftArmBackCanvas.GetValueAt(curPos.x, curPos.y);
-//    leds.setPixel(i, value);
-//  }
-//}
-//
-//void DrawLeftArmFrontPartTwoMatrix()
-//{
-//  for(int i = minLEDLeftArmPartTwo; i < maxLEDLeftArmPartTwo; i++)
-//  {
-//    LEDPos curPos = LeftArmPartTwoMap[i - minLEDLeftArmPartTwo];
-//    int value = LeftArmFrontPartTwoCanvas.GetValueAt(curPos.x, curPos.y);
-//    leds.setPixel(i, value);
-//  }
-//}
-//
-//void DrawLeftArmFrontPartOneMatrix()
-//{
-//  for(int i = minLEDLeftArmFrontPartOne; i < maxLEDLeftArmFrontPartOne; i++)
-//  {
-//    LEDPos curPos = LeftArmPartOneMap[i - minLEDLeftArmFrontPartOne];
-//    int value = LeftArmFrontPartOneCanvas.GetValueAt(curPos.x, curPos.y);
-//    leds.setPixel(i, value);
-//  }
-//}
+void DrawLeftArmBackMatrix()
+{
+  for(int i = minLEDLeftArmBack; i < maxLEDLeftArmBack; i++)
+  {
+    LEDPos curPos = LeftArmBackMap[i - minLEDLeftArmBack];
+    int value = LeftArmBackCanvas.GetValueAt(curPos.x, curPos.y);
+    leds.setPixel(i, value);
+  }
+}
+
+void DrawLeftArmFrontPartTwoMatrix()
+{
+  for(int i = minLEDLeftArmPartTwo; i < maxLEDLeftArmPartTwo; i++)
+  {
+    LEDPos curPos = LeftArmPartTwoMap[i - minLEDLeftArmPartTwo];
+    int value = LeftArmFrontPartTwoCanvas.GetValueAt(curPos.x, curPos.y);
+    leds.setPixel(i, value);
+  }
+}
+
+void DrawLeftArmFrontPartOneMatrix()
+{
+  for(int i = minLEDLeftArmFrontPartOne; i < maxLEDLeftArmFrontPartOne; i++)
+  {
+    LEDPos curPos = LeftArmPartOneMap[i - minLEDLeftArmFrontPartOne];
+    int value = LeftArmFrontPartOneCanvas.GetValueAt(curPos.x, curPos.y);
+    leds.setPixel(i, value);
+  }
+}
 
 void DrawLeftBackMatrix()
 {
@@ -158,35 +158,35 @@ void DrawLeftChestMatrix()
   }
 }
 
-//void DrawRightArmBackMatrix()
-//{
-//  for(int i = minLEDRightArmBack; i < maxLEDRightArmBack; i++)
-//  {
-//    LEDPos curPos = RightArmBackMap[i - minLEDRightArmBack];
-//    int value = RightArmBackCanvas.GetValueAt(curPos.x, curPos.y);
-//    leds.setPixel(i, value);
-//  }
-//}
-//
-//void DrawRightArmFrontPartOneMatrix()
-//{
-//  for(int i = minLEDRightArmPartOne; i < maxLEDRightArmPartOne; i++)
-//  {
-//    LEDPos curPos = RightArmPartOneMap[i - minLEDRightArmPartOne];
-//    int value = RightArmFrontPartOneCanvas.GetValueAt(curPos.x, curPos.y);
-//    leds.setPixel(i, value);
-//  }
-//}
-//
-//void DrawRightArmFrontPartTwoMatrix()
-//{
-//  for(int i = minLEDRightArmPartTwo; i < maxLEDRightArmPartTwo; i++)
-//  {
-//    LEDPos curPos = RightArmPartTwoMap[i - minLEDRightArmPartTwo];
-//    int value = RightArmFrontPartTwoCanvas.GetValueAt(curPos.x, curPos.y);
-//    leds.setPixel(i, value);
-//  }
-//}
+void DrawRightArmBackMatrix()
+{
+  for(int i = minLEDRightArmBack; i < maxLEDRightArmBack; i++)
+  {
+    LEDPos curPos = RightArmBackMap[i - minLEDRightArmBack];
+    int value = RightArmBackCanvas.GetValueAt(curPos.x, curPos.y);
+    leds.setPixel(i, value);
+  }
+}
+
+void DrawRightArmFrontPartOneMatrix()
+{
+  for(int i = minLEDRightArmPartOne; i < maxLEDRightArmPartOne; i++)
+  {
+    LEDPos curPos = RightArmPartOneMap[i - minLEDRightArmPartOne];
+    int value = RightArmFrontPartOneCanvas.GetValueAt(curPos.x, curPos.y);
+    leds.setPixel(i, value);
+  }
+}
+
+void DrawRightArmFrontPartTwoMatrix()
+{
+  for(int i = minLEDRightArmPartTwo; i < maxLEDRightArmPartTwo; i++)
+  {
+    LEDPos curPos = RightArmPartTwoMap[i - minLEDRightArmPartTwo];
+    int value = RightArmFrontPartTwoCanvas.GetValueAt(curPos.x, curPos.y);
+    leds.setPixel(i, value);
+  }
+}
 
 void DrawRightBackMatrix()
 {
@@ -214,19 +214,15 @@ void DrawAllMatrices()
   Serial.println("Start Drawing");
   delay(10);
 
-  //DrawLeftArmBackMatrix();
-  //DrawLeftArmFrontPartTwoMatrix();
-  //DrawLeftArmFrontPartOneMatrix();
+  DrawLeftArmBackMatrix();
+  DrawLeftArmFrontPartTwoMatrix();
+  DrawLeftArmFrontPartOneMatrix();
   DrawLeftBackMatrix();
   DrawLeftChestMatrix();
-
-  delay(10);
-  Serial.println("Done with left chest");
-  delay(10);
 //
-  //DrawRightArmBackMatrix();
-  //DrawRightArmFrontPartTwoMatrix();
-  //DrawRightArmFrontPartOneMatrix();
+  DrawRightArmBackMatrix();
+  DrawRightArmFrontPartTwoMatrix();
+  DrawRightArmFrontPartOneMatrix();
   
   DrawRightBackMatrix();
   DrawRightChestMatrix();
