@@ -283,6 +283,48 @@ void CenterOut()
   
 }
 
+void TurnLeft()
+{
+    for(int i = 20; i > 0; i--)
+  {
+    int leftChestPositionY = map(i, 20, 0, 10, ySizeLeftChest-1);
+
+    int blobSize = map(i, 20, 0, 2, 10);
+
+    LeftChestCanvas.DrawRectangle(xSizeLeftChest/2 - blobSize, leftChestPositionY-10, xSizeLeftChest/2 + blobSize, leftChestPositionY, 0x00FF00);
+    LeftChestCanvas.Fill(xSizeLeftChest/2, leftChestPositionY-blobSize/2, 0x00ff00);
+    LeftChestCanvas.MeanFilter(3);
+    DrawAllMatrices();
+    LeftChestCanvas.ClearMatrix();
+
+    Serial.print("On Frame: ");
+    Serial.print(i);
+    Serial.print(" Left Chest Position: ");
+    Serial.println(leftChestPositionY);
+  }
+}
+
+void TurnRight()
+{
+    for(int i = 20; i > 0; i--)
+  {
+    int rightChestPositionY = map(i, 0, 20, 10, ySizeRightChest-1);
+
+    int blobSize = map(i, 20, 0, 2, 10);
+
+    RightChestCanvas.DrawRectangle(xSizeRightChest/2 - blobSize, rightChestPositionY-10, xSizeRightChest/2 + blobSize, rightChestPositionY, 0x00FF00);
+    RightChestCanvas.Fill(xSizeRightChest/2, rightChestPositionY-blobSize/2, 0x00FF00);
+    RightChestCanvas.MeanFilter(3);
+    DrawAllMatrices();
+    RightChestCanvas.ClearMatrix();
+
+    Serial.print("On Frame: ");
+    Serial.print(i);
+    Serial.print(" Right Chest Position: ");
+    Serial.println(rightChestPositionY);
+  }
+}
+
 void DrawWings()
 {
   //for(int i = 0; i < 13; i++)
@@ -423,6 +465,18 @@ void loop() {
   for(int i = 0; i < 4; i++)
   {
     CenterOut();
+  }
+  InitializeMatrices();
+
+  for(int i = 0; i < 4; i++)
+  {
+    TurnRight();
+  }
+  InitializeMatrices();
+
+  for(int i = 0; i < 4; i++)
+  {
+    TurnLeft();
   }
   InitializeMatrices();
 
