@@ -3,7 +3,7 @@ int ySizeRightChest = 18;
 int minLEDRightChest = 1280;
 int maxLEDRightChest = 2152;
 
-LEDPos RightChestMap [872];
+LEDPos RightChestMap [873];
 
 void InitializeRightChestMap()
 {

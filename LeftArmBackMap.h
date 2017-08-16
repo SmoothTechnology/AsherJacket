@@ -4,7 +4,7 @@ int xSizeLeftArmBack = 37;
 int ySizeLeftArmBack = 22;
 int minLEDLeftArmBack = 4094;
 int maxLEDLeftArmBack = 4680;
-LEDPos LeftArmBackMap [586];
+LEDPos LeftArmBackMap [587];
 
 void InitializeLeftArmBackMap()
 {

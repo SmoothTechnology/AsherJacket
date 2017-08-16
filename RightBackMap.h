@@ -3,7 +3,7 @@ int ySizeRightBack = 16;
 int minLEDRightBack = 6400;
 int maxLEDRightBack = 7075;
 
-LEDPos RightBackMap [675];
+LEDPos RightBackMap [676];
 
 void InitializeRightBackMap()
 {
