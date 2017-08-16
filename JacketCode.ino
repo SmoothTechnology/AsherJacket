@@ -60,16 +60,16 @@ const int config = WS2811_GRB | WS2811_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 
-MatrixDraw LeftArmBackCanvas            (xSizeLeftArmBack, ySizeLeftArmBack);
-MatrixDraw LeftArmFrontPartTwoCanvas    (xSizeLeftArmPartTwo, ySizeLeftArmPartTwo);
-MatrixDraw LeftArmFrontPartOneCanvas    (xSizeLeftArmFrontPartOne, ySizeLeftArmFrontPartOne);
-MatrixDraw LeftBackCanvas               (xSizeLeftBack, ySizeLeftBack);
-MatrixDraw LeftChestCanvas              (xSizeLeftChest, ySizeLeftChest);
-MatrixDraw RightArmBackCanvas           (xSizeRightArmBack, ySizeRightArmBack);
-MatrixDraw RightArmFrontPartOneCanvas   (xSizeRightArmPartOne, ySizeRightArmPartOne);
-MatrixDraw RightArmFrontPartTwoCanvas   (xSizeRightArmPartTwo, ySizeRightArmPartTwo);
-MatrixDraw RightBackCanvas              (xSizeRightBack, ySizeRightBack);
-MatrixDraw RightChestCanvas             (xSizeRightChest, ySizeRightChest);
+MatrixDraw LeftArmBackCanvas            (xSizeLeftArmBack, ySizeLeftArmBack, 3);
+MatrixDraw LeftArmFrontPartTwoCanvas    (xSizeLeftArmPartTwo, ySizeLeftArmPartTwo, 3);
+MatrixDraw LeftArmFrontPartOneCanvas    (xSizeLeftArmFrontPartOne, ySizeLeftArmFrontPartOne, 3);
+MatrixDraw LeftBackCanvas               (xSizeLeftBack, ySizeLeftBack, 3);
+MatrixDraw LeftChestCanvas              (xSizeLeftChest, ySizeLeftChest, 3);
+MatrixDraw RightArmBackCanvas           (xSizeRightArmBack, ySizeRightArmBack, 3);
+MatrixDraw RightArmFrontPartOneCanvas   (xSizeRightArmPartOne, ySizeRightArmPartOne, 3);
+MatrixDraw RightArmFrontPartTwoCanvas   (xSizeRightArmPartTwo, ySizeRightArmPartTwo, 3);
+MatrixDraw RightBackCanvas              (xSizeRightBack, ySizeRightBack, 3);
+MatrixDraw RightChestCanvas             (xSizeRightChest, ySizeRightChest, 3);
 
 void InitializeMatrices()
 {
@@ -277,7 +277,8 @@ void DrawWings()
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+3, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+4, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+5, ySizeRightBack-1, 0x00FF00);
-
+    //RightBackCanvas.Fill(30, 5, 0xFF0000);
+    RightBackCanvas.MeanFilter(3);
     //RightBackCanvas.Fill(5,5, 0xAA00AA);
     //RightBackCanvas.Fill(5, 5, 0xFF00FF);
     
@@ -301,6 +302,8 @@ void DrawWings()
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+3, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+4, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+5, ySizeRightBack-1, 0x00FF00);
+    //RightBackCanvas.Fill(30, 5, 0xFF0000);
+    RightBackCanvas.MeanFilter(3);
     //RightBackCanvas.Fill(5, 5, 0xFF00FF);
     
     //LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, i, 0x00FF00);
@@ -393,3 +396,4 @@ void colorWipe(int color, int wait)
     delayMicroseconds(wait);
   }
 }
+
