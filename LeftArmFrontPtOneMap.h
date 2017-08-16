@@ -7,7 +7,7 @@ int maxLEDLeftArmFrontPartOne = 4092;
 
 LEDPos LeftArmPartOneMap [252];
 
-void InitializeLeftArmFrontPartOneMap
+void InitializeLeftArmFrontPartOneMap()
 {
 LeftArmPartOneMap[64].x = 0;
 LeftArmPartOneMap[64].y = 0;

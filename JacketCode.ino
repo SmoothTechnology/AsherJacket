@@ -42,6 +42,14 @@
 #include "MatrixDraw.h"
 #include "LeftArmBackMap.h"
 #include "LeftArmFrontPartTwoMap.h"
+#include "LeftArmFrontPtOneMap.h"
+#include "LeftBackMap.h"
+#include "LeftChestMap.h"
+#include "RightArmBackMap.h"
+#include "RightArmFrontPartOneMap.h"
+#include "RightArmFrontPartTwoMap.h"
+#include "RightBackMap.h"
+#include "RightChestMap.h"
 
 const int ledsPerStrip = 1280;
 
@@ -85,9 +93,19 @@ void InitializeAllMaps()
 {
   InitializeLeftArmBackMap();
   InitializeLeftArmFrontPartTwoMap();
+  InitializeLeftArmFrontPartOneMap();
+  InitializeLeftBackMap();
+  InitializeLeftChestMap();
+  InitializeRightArmMap();
+  InitializeRightArmPartOneMap();
+  InitializeRightArmPartTwoMap();
+  InitializeRightBackMap();
+  InitializeRightChestMap();
 }
 
 void setup() {
+
+  InitializeAllMaps();
 
   Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
   leds.begin();
