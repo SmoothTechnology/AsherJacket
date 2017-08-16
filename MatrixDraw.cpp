@@ -52,9 +52,16 @@ void MatrixDraw::DrawLine(int x1, int y1, int x2, int y2, int color)
 		  		SetPixelAt(x, y, color);
 			}
 	}
-	else
+	else if (dx > 0)
 	{
 		for(int x = x1; x <= x2; x++){
+  			int y = y1 + dy * (x - x1) / dx;
+  			SetPixelAt(x, y, color);
+		}
+	}
+	else
+	{
+		for(int x = x1; x >= x2; x--){
   			int y = y1 + dy * (x - x1) / dx;
   			SetPixelAt(x, y, color);
 		}
