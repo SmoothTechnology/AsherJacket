@@ -60,6 +60,32 @@ const int config = WS2811_GRB | WS2811_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 
+MatrixDraw LeftArmBackCanvas            (xSizeLeftArmBack, ySizeLeftArmBack);
+MatrixDraw LeftArmFrontPartTwoCanvas    (xSizeLeftArmPartTwo, ySizeLeftArmPartTwo);
+MatrixDraw LeftArmFrontPartOneCanvas    (xSizeLeftArmFrontPartOne, ySizeLeftArmFrontPartOne);
+MatrixDraw LeftBackCanvas               (xSizeLeftArmBack, ySizeLeftArmBack);
+MatrixDraw LeftChestCanvas              (xSizeLeftChest, ySizeLeftChest);
+MatrixDraw RightArmBackCanvas           (xSizeRightArmBack, ySizeRightArmBack);
+MatrixDraw RightArmFrontPartOneCanvas   (xSizeRightArmPartOne, ySizeRightArmPartOne);
+MatrixDraw RightArmFrontPartTwoCanvas   (xSizeRightArmPartTwo, ySizeRightArmPartTwo);
+MatrixDraw RightBackCanvas              (xSizeRightBack, ySizeRightBack);
+MatrixDraw RightChestCanvas             (xSizeRightChest, ySizeRightChest);
+
+void InitializeMatrices()
+{
+  LeftArmBackCanvas.ClearMatrix();      
+  LeftArmFrontPartTwoCanvas.ClearMatrix();  
+  LeftArmFrontPartOneCanvas.ClearMatrix();   
+  LeftBackCanvas.ClearMatrix();              
+  LeftChestCanvas.ClearMatrix();             
+  RightArmBackCanvas.ClearMatrix();          
+  RightArmFrontPartOneCanvas.ClearMatrix();  
+  RightArmFrontPartTwoCanvas.ClearMatrix();  
+  RightBackCanvas.ClearMatrix();             
+  RightChestCanvas.ClearMatrix();            
+}
+
+
 struct XYPos{
   int x;
   int y;
@@ -106,6 +132,7 @@ void InitializeAllMaps()
 void setup() {
 
   InitializeAllMaps();
+  InitializeMatrices();
 
   Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
   leds.begin();
