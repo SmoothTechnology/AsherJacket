@@ -361,6 +361,22 @@ void LightUpAllCanvases()
   DrawAllMatrices();
 }
 
+void StopLight()
+{
+  LeftArmBackCanvas.Fill(5, 5, 0xFF0000);      
+  LeftArmFrontPartTwoCanvas.Fill(5, 5, 0xFF0000);  
+  LeftArmFrontPartOneCanvas.Fill(5, 5, 0xFF0000);   
+  LeftBackCanvas.Fill(5, 5, 0xFF0000);              
+  LeftChestCanvas.Fill(5, 5, 0xFF0000);             
+  RightArmBackCanvas.Fill(5, 5, 0xFF0000);          
+  RightArmFrontPartOneCanvas.Fill(5, 5, 0xFF0000);  
+  RightArmFrontPartTwoCanvas.Fill(5, 5, 0xFF0000);  
+  RightBackCanvas.Fill(5, 5, 0xFF0000);             
+  RightChestCanvas.Fill(5, 5, 0xFF0000);
+
+  DrawAllMatrices();
+}
+
 void loop() {
   //int microsec = 0;  // change them all in 2 seconds
 //
@@ -404,15 +420,21 @@ void loop() {
   
   //LightUpAllCanvases();
 
-  CenterOut();
-  CenterOut();
-  CenterOut();
-  CenterOut();
-  
-  DrawWings();
-  DrawWings();
-  DrawWings();
-  DrawWings();
+  for(int i = 0; i < 4; i++)
+  {
+    CenterOut();
+  }
+  InitializeMatrices();
+
+  for(int i = 0; i < 4; i++)
+  {
+    DrawWings();
+  }
+  InitializeMatrices();
+
+  StopLight();
+  delay(2000);
+  InitializeMatrices();
 }
 
 void lightAll(int color)
