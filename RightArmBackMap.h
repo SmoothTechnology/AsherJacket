@@ -3,7 +3,7 @@ int ySizeRightArmBack = 18;
 int minLEDRightArmBack = 229;
 int maxLEDRightArmBack = 853;
 
-LEDPos RightArmBackMap [624];
+LEDPos RightArmBackMap [625];
 
 void InitializeRightArmMap()
 {

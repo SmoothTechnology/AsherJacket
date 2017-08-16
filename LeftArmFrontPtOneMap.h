@@ -5,7 +5,7 @@ int ySizeLeftArmFrontPartOne = 14;
 int minLEDLeftArmFrontPartOne = 3840;
 int maxLEDLeftArmFrontPartOne = 4092;
 
-LEDPos LeftArmPartOneMap [252];
+LEDPos LeftArmPartOneMap [253];
 
 void InitializeLeftArmFrontPartOneMap()
 {
