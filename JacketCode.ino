@@ -260,6 +260,7 @@ void CenterOut()
 {
   int maxFrames = 20;
   int armTrigger = maxFrames;
+  int fadeTrigger = maxFrames;
   for(int i = maxFrames; i > 0; i--)
   {
     int rightChestPositionY = map(i, 0, maxFrames, 10, ySizeRightChest-1);
@@ -305,16 +306,22 @@ void CenterOut()
       LeftArmFrontPartOneCanvas.Fill(leftArmFrontPartOnePos-2, ySizeLeftArmFrontPartOne/2, 0xFF0000);
     }
 
+    if(i < fadeTrigger)
+    {
+      int glowLevel = map(i, 0, fadeTrigger, 0, 100);
+      int redLevel = map(glowLevel, 0, 100, 0, 70);
+      int greenLevel = map(glowLevel, 0, 100, 0, 40);
+      int color = redLevel << 16;
+      color += greenLevel << 8;
+      color = color & 0xFFFF00;
+
+      RightBackCanvas.Fill(5,5, color);
+      LeftBackCanvas.Fill(5,5, color);
+    }
+
 
     DrawAllMatrices();
-    RightChestCanvas.ClearMatrix();
-    LeftChestCanvas.ClearMatrix();
-    RightArmFrontPartOneCanvas.ClearMatrix();
-    RightArmFrontPartTwoCanvas.ClearMatrix();
-    RightArmBackCanvas.ClearMatrix();
-    LeftArmBackCanvas.ClearMatrix();
-    LeftArmFrontPartTwoCanvas.ClearMatrix();
-    LeftArmFrontPartOneCanvas.ClearMatrix();
+    InitializeMatrices();
 
     Serial.print("On Frame: ");
     Serial.print(i);
@@ -329,6 +336,7 @@ void TurnLeft()
 
   int maxFrames = 20;
   int armTrigger = maxFrames;
+  int fadeTrigger = maxFrames;
 
   for(int i = maxFrames; i > 0; i--)
   {
@@ -356,11 +364,20 @@ void TurnLeft()
       LeftArmFrontPartOneCanvas.Fill(leftArmFrontPartOnePos-2, ySizeLeftArmFrontPartOne/2, 0xFF0000);
     }
 
+    if(i < fadeTrigger)
+    {
+      int glowLevel = map(i, 0, fadeTrigger, 0, 100);
+      int redLevel = map(glowLevel, 0, 100, 0, 70);
+      int greenLevel = map(glowLevel, 0, 100, 0, 40);
+      int color = redLevel << 16;
+      color += greenLevel << 8;
+      color = color & 0xFFFF00;
+
+      LeftBackCanvas.Fill(5,5, color);
+    }
+
     DrawAllMatrices();
-    LeftChestCanvas.ClearMatrix();
-    LeftArmBackCanvas.ClearMatrix();
-    LeftArmFrontPartTwoCanvas.ClearMatrix();
-    LeftArmFrontPartOneCanvas.ClearMatrix();
+    InitializeMatrices();
 
     Serial.print("On Frame: ");
     Serial.print(i);
@@ -374,6 +391,7 @@ void TurnRight()
 
   int maxFrames = 20;
   int armTrigger = maxFrames;
+  int fadeTrigger = maxFrames;
 
   for(int i = maxFrames; i > 0; i--)
   {
@@ -401,11 +419,20 @@ void TurnRight()
       RightArmFrontPartOneCanvas.Fill(rightArmFrontPartOnePos-2, ySizeRightArmPartOne/2, 0xFF0000);
     }
 
+    if(i < fadeTrigger)
+    {
+      int glowLevel = map(i, 0, fadeTrigger, 0, 100);
+      int redLevel = map(glowLevel, 0, 100, 0, 70);
+      int greenLevel = map(glowLevel, 0, 100, 0, 40);
+      int color = redLevel << 16;
+      color += greenLevel << 8;
+      color = color & 0xFFFF00;
+
+      RightBackCanvas.Fill(5,5, color);
+    }
+
     DrawAllMatrices();
-    RightChestCanvas.ClearMatrix();
-    RightArmFrontPartOneCanvas.ClearMatrix();
-    RightArmFrontPartTwoCanvas.ClearMatrix();
-    RightArmBackCanvas.ClearMatrix();
+    InitializeMatrices();
 
     Serial.print("On Frame: ");
     Serial.print(i);
@@ -631,25 +658,25 @@ void loop() {
     CenterOut();
   }
   InitializeMatrices();
-
+  
   for(int i = 0; i < 4; i++)
   {
     TurnRight();
   }
   InitializeMatrices();
-
+  
   for(int i = 0; i < 4; i++)
   {
     TurnLeft();
   }
   InitializeMatrices();
-
+  
   for(int i = 0; i < 4; i++)
   {
     DrawWings();
   }
   InitializeMatrices();
-
+  
   StopLight();
   InitializeMatrices();
 }
