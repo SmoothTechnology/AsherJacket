@@ -991,8 +991,7 @@ void loop() {
  //InitializeMatrices();
 
   //DrawPlasma();
-  frames += 3;
-  drawPlasma2(frames);
+  drawPlasma2(frames++);
 
   //for(int i = 0 ; i < 255; i++)
   //{
