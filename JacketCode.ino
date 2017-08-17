@@ -346,7 +346,16 @@ void DrawWings()
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+3, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+4, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+5, ySizeRightBack-1, 0x00FF00);
+
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+1, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+3, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+4, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+5, ySizeLeftBack-1, 0x00FF00);
+
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
+    LeftBackCanvas.MeanFilter(3);
     RightBackCanvas.MeanFilter(3);
     //RightBackCanvas.Fill(5,5, 0xAA00AA);
     //RightBackCanvas.Fill(5, 5, 0xFF00FF);
@@ -354,7 +363,7 @@ void DrawWings()
     //LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, i, 0x00FF00);
     DrawAllMatrices();
     RightBackCanvas.ClearMatrix();
-    //LeftBackCanvas.ClearMatrix();
+    LeftBackCanvas.ClearMatrix();
     delay(20);
 //  
   Serial.print(i);
@@ -371,14 +380,23 @@ void DrawWings()
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+3, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+4, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+5, ySizeRightBack-1, 0x00FF00);
+
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+1, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+3, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+4, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+5, ySizeLeftBack-1, 0x00FF00);
+
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
+    LeftBackCanvas.MeanFilter(3);
     RightBackCanvas.MeanFilter(3);
     //RightBackCanvas.Fill(5, 5, 0xFF00FF);
     
     //LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, i, 0x00FF00);
     DrawAllMatrices();
     RightBackCanvas.ClearMatrix();
-    //LeftBackCanvas.ClearMatrix();
+    LeftBackCanvas.ClearMatrix();
     delay(20);
 //  
   Serial.print(i);
@@ -405,16 +423,16 @@ void LightUpAllCanvases()
 
 void StopLight()
 {
-  LeftArmBackCanvas.Fill(5, 5, 0xFF0000);      
-  LeftArmFrontPartTwoCanvas.Fill(5, 5, 0xFF0000);  
-  LeftArmFrontPartOneCanvas.Fill(5, 5, 0xFF0000);   
-  LeftBackCanvas.Fill(5, 5, 0xFF0000);              
-  LeftChestCanvas.Fill(5, 5, 0xFF0000);             
-  RightArmBackCanvas.Fill(5, 5, 0xFF0000);          
-  RightArmFrontPartOneCanvas.Fill(5, 5, 0xFF0000);  
-  RightArmFrontPartTwoCanvas.Fill(5, 5, 0xFF0000);  
-  RightBackCanvas.Fill(5, 5, 0xFF0000);             
-  RightChestCanvas.Fill(5, 5, 0xFF0000);
+  LeftArmBackCanvas.Fill(5, 5, 0x110000);      
+  LeftArmFrontPartTwoCanvas.Fill(5, 5, 0x110000);  
+  LeftArmFrontPartOneCanvas.Fill(5, 5, 0x110000);   
+  LeftBackCanvas.Fill(5, 5, 0x110000);              
+  LeftChestCanvas.Fill(5, 5, 0x110000);             
+  RightArmBackCanvas.Fill(5, 5, 0x110000);          
+  RightArmFrontPartOneCanvas.Fill(5, 5, 0x110000);  
+  RightArmFrontPartTwoCanvas.Fill(5, 5, 0x110000);  
+  RightBackCanvas.Fill(5, 5, 0x110000);             
+  RightChestCanvas.Fill(5, 5, 0x110000);
 
   DrawAllMatrices();
 }
