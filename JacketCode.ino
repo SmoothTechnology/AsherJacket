@@ -109,7 +109,7 @@ void InitializeAllMaps()
 
 void DrawLeftArmBackMatrix()
 {
-  for(int i = minLEDLeftArmBack; i < maxLEDLeftArmBack; i++)
+  for(int i = minLEDLeftArmBack; i < maxLEDLeftArmBack+1; i++)
   {
     LEDPos curPos = LeftArmBackMap[i - minLEDLeftArmBack];
     int value = LeftArmBackCanvas.GetValueAt(curPos.x, curPos.y);
@@ -119,7 +119,7 @@ void DrawLeftArmBackMatrix()
 
 void DrawLeftArmFrontPartTwoMatrix()
 {
-  for(int i = minLEDLeftArmPartTwo; i < maxLEDLeftArmPartTwo; i++)
+  for(int i = minLEDLeftArmPartTwo; i < maxLEDLeftArmPartTwo+1; i++)
   {
     LEDPos curPos = LeftArmPartTwoMap[i - minLEDLeftArmPartTwo];
     int value = LeftArmFrontPartTwoCanvas.GetValueAt(curPos.x, curPos.y);
@@ -129,7 +129,7 @@ void DrawLeftArmFrontPartTwoMatrix()
 
 void DrawLeftArmFrontPartOneMatrix()
 {
-  for(int i = minLEDLeftArmFrontPartOne; i < maxLEDLeftArmFrontPartOne; i++)
+  for(int i = minLEDLeftArmFrontPartOne; i < maxLEDLeftArmFrontPartOne+1; i++)
   {
     LEDPos curPos = LeftArmPartOneMap[i - minLEDLeftArmFrontPartOne];
     int value = LeftArmFrontPartOneCanvas.GetValueAt(curPos.x, curPos.y);
@@ -139,7 +139,7 @@ void DrawLeftArmFrontPartOneMatrix()
 
 void DrawLeftBackMatrix()
 {
-  for(int i = minLEDLeftBack; i < maxLEDLeftBack; i++)
+  for(int i = minLEDLeftBack; i < maxLEDLeftBack+1; i++)
   {
     LEDPos curPos = LeftBackMap[i - minLEDLeftBack];
     int value = LeftBackCanvas.GetValueAt(curPos.x, curPos.y);
@@ -150,7 +150,7 @@ void DrawLeftBackMatrix()
 void DrawLeftChestMatrix()
 {
 
-  for(int i = minLEDLeftChest; i < maxLEDLeftChest; i++)
+  for(int i = minLEDLeftChest; i < maxLEDLeftChest+1; i++)
   {
     LEDPos curPos = LeftChestMap[i - minLEDLeftChest];
     int value = LeftChestCanvas.GetValueAt(curPos.x, curPos.y);
@@ -160,7 +160,7 @@ void DrawLeftChestMatrix()
 
 void DrawRightArmBackMatrix()
 {
-  for(int i = minLEDRightArmBack; i < maxLEDRightArmBack; i++)
+  for(int i = minLEDRightArmBack; i < maxLEDRightArmBack+1; i++)
   {
     LEDPos curPos = RightArmBackMap[i - minLEDRightArmBack];
     int value = RightArmBackCanvas.GetValueAt(curPos.x, curPos.y);
@@ -170,7 +170,7 @@ void DrawRightArmBackMatrix()
 
 void DrawRightArmFrontPartOneMatrix()
 {
-  for(int i = minLEDRightArmPartOne; i < maxLEDRightArmPartOne; i++)
+  for(int i = minLEDRightArmPartOne; i < maxLEDRightArmPartOne+1; i++)
   {
     LEDPos curPos = RightArmPartOneMap[i - minLEDRightArmPartOne];
     int value = RightArmFrontPartOneCanvas.GetValueAt(curPos.x, curPos.y);
@@ -180,7 +180,7 @@ void DrawRightArmFrontPartOneMatrix()
 
 void DrawRightArmFrontPartTwoMatrix()
 {
-  for(int i = minLEDRightArmPartTwo; i < maxLEDRightArmPartTwo; i++)
+  for(int i = minLEDRightArmPartTwo; i < maxLEDRightArmPartTwo+1; i++)
   {
     LEDPos curPos = RightArmPartTwoMap[i - minLEDRightArmPartTwo];
     int value = RightArmFrontPartTwoCanvas.GetValueAt(curPos.x, curPos.y);
@@ -190,7 +190,7 @@ void DrawRightArmFrontPartTwoMatrix()
 
 void DrawRightBackMatrix()
 {
-  for(int i = minLEDRightBack; i < maxLEDRightBack; i++)
+  for(int i = minLEDRightBack; i < maxLEDRightBack+1; i++)
   {
     LEDPos curPos = RightBackMap[i - minLEDRightBack];
     int value = RightBackCanvas.GetValueAt(curPos.x, curPos.y);
@@ -200,7 +200,7 @@ void DrawRightBackMatrix()
 
 void DrawRightChestMatrix()
 {
-  for(int i = minLEDRightChest; i < maxLEDRightChest; i++)
+  for(int i = minLEDRightChest; i < maxLEDRightChest+1; i++)
   {
     LEDPos curPos = RightChestMap[i - minLEDRightChest];
     int value = RightChestCanvas.GetValueAt(curPos.x, curPos.y);

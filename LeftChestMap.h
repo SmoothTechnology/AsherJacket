@@ -1,9 +1,9 @@
 int xSizeLeftChest = 42;
 int ySizeLeftChest = 26;
 int minLEDLeftChest = 2560;
-int maxLEDLeftChest = 3380;
+int maxLEDLeftChest = 3381;
 
-LEDPos LeftChestMap [821];
+LEDPos LeftChestMap [822];
 
 void InitializeLeftChestMap()
 {
@@ -1667,6 +1667,9 @@ LeftChestMap[819].y = 7;
 
 LeftChestMap[820].x = 4;
 LeftChestMap[820].y = 7;
+
+LeftChestMap[821].x = 3;
+LeftChestMap[821].y = 7;
 
 }
 
