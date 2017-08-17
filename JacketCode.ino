@@ -62,18 +62,18 @@ const int config = WS2811_GRB | WS2811_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 
-MatrixDraw LeftArmBackCanvas            (xSizeLeftArmBack, ySizeLeftArmBack, 3);
-MatrixDraw LeftArmFrontPartTwoCanvas    (xSizeLeftArmPartTwo, ySizeLeftArmPartTwo, 3);
-MatrixDraw LeftArmFrontPartOneCanvas    (xSizeLeftArmFrontPartOne, ySizeLeftArmFrontPartOne, 3);
+MatrixDraw LeftArmBackCanvas            (xSizeLeftArmBack, ySizeLeftArmBack);
+MatrixDraw LeftArmFrontPartTwoCanvas    (xSizeLeftArmPartTwo, ySizeLeftArmPartTwo);
+MatrixDraw LeftArmFrontPartOneCanvas    (xSizeLeftArmFrontPartOne, ySizeLeftArmFrontPartOne);
 MatrixDraw LeftBackCanvas               (xSizeLeftBack, ySizeLeftBack, 3);
 MatrixDraw LeftChestCanvas              (xSizeLeftChest, ySizeLeftChest, 3);
-MatrixDraw RightArmBackCanvas           (xSizeRightArmBack, ySizeRightArmBack, 3);
-MatrixDraw RightArmFrontPartOneCanvas   (xSizeRightArmPartOne, ySizeRightArmPartOne, 3);
-MatrixDraw RightArmFrontPartTwoCanvas   (xSizeRightArmPartTwo, ySizeRightArmPartTwo, 3);
+MatrixDraw RightArmBackCanvas           (xSizeRightArmBack, ySizeRightArmBack);
+MatrixDraw RightArmFrontPartOneCanvas   (xSizeRightArmPartOne, ySizeRightArmPartOne);
+MatrixDraw RightArmFrontPartTwoCanvas   (xSizeRightArmPartTwo, ySizeRightArmPartTwo);
 MatrixDraw RightBackCanvas              (xSizeRightBack, ySizeRightBack, 3);
 MatrixDraw RightChestCanvas             (xSizeRightChest, ySizeRightChest, 3);
-MatrixDraw RightShoulderCanvas          (xSizeRightShoulder, ySizeRightShoulder, 3);
-MatrixDraw LeftShoulderCanvas           (xSizeLeftShoulder, ySizeLeftShoulder, 3);
+MatrixDraw RightShoulderCanvas          (xSizeRightShoulder, ySizeRightShoulder);
+MatrixDraw LeftShoulderCanvas           (xSizeLeftShoulder, ySizeLeftShoulder);
 
 void InitializeMatrices()
 {
@@ -252,8 +252,8 @@ void DrawAllMatrices()
   DrawRightBackMatrix();
   DrawRightChestMatrix();
 
-  DrawRightShoulderMatrix();
-  DrawLeftShoulderMatrix();
+ DrawRightShoulderMatrix();
+ DrawLeftShoulderMatrix();
 
   leds.show();
 }
