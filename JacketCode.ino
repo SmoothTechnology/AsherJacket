@@ -265,11 +265,11 @@ void CenterOut()
 
     int blobSize = map(i, 20, 0, 2, 10);
 
-    RightChestCanvas.DrawRectangle(xSizeRightChest/2 - blobSize, rightChestPositionY-10, xSizeRightChest/2 + blobSize, rightChestPositionY, 0x00FF00);
-    RightChestCanvas.Fill(xSizeRightChest/2, rightChestPositionY-blobSize/2, 0x00FF00);
+    RightChestCanvas.DrawRectangle(xSizeRightChest/2 - blobSize, rightChestPositionY-10, xSizeRightChest/2 + blobSize, rightChestPositionY, 0x008800);
+    RightChestCanvas.Fill(xSizeRightChest/2, rightChestPositionY-blobSize/2, 0x008800);
     RightChestCanvas.MeanFilter(3);
-    LeftChestCanvas.DrawRectangle(xSizeLeftChest/2 - blobSize, leftChestPositionY-10, xSizeLeftChest/2 + blobSize, leftChestPositionY, 0x00FF00);
-    LeftChestCanvas.Fill(xSizeLeftChest/2, leftChestPositionY-blobSize/2, 0x00ff00);
+    LeftChestCanvas.DrawRectangle(xSizeLeftChest/2 - blobSize, leftChestPositionY-10, xSizeLeftChest/2 + blobSize, leftChestPositionY, 0x008800);
+    LeftChestCanvas.Fill(xSizeLeftChest/2, leftChestPositionY-blobSize/2, 0x008800);
     LeftChestCanvas.MeanFilter(3);
     DrawAllMatrices();
     RightChestCanvas.ClearMatrix();
@@ -291,8 +291,8 @@ void TurnLeft()
 
     int blobSize = map(i, 20, 0, 2, 10);
 
-    LeftChestCanvas.DrawRectangle(xSizeLeftChest/2 - blobSize, leftChestPositionY-10, xSizeLeftChest/2 + blobSize, leftChestPositionY, 0x00FF00);
-    LeftChestCanvas.Fill(xSizeLeftChest/2, leftChestPositionY-blobSize/2, 0x00ff00);
+    LeftChestCanvas.DrawRectangle(xSizeLeftChest/2 - blobSize, leftChestPositionY-10, xSizeLeftChest/2 + blobSize, leftChestPositionY, 0x008800);
+    LeftChestCanvas.Fill(xSizeLeftChest/2, leftChestPositionY-blobSize/2, 0x008800);
     LeftChestCanvas.MeanFilter(3);
     DrawAllMatrices();
     LeftChestCanvas.ClearMatrix();
@@ -312,8 +312,8 @@ void TurnRight()
 
     int blobSize = map(i, 20, 0, 2, 10);
 
-    RightChestCanvas.DrawRectangle(xSizeRightChest/2 - blobSize, rightChestPositionY-10, xSizeRightChest/2 + blobSize, rightChestPositionY, 0x00FF00);
-    RightChestCanvas.Fill(xSizeRightChest/2, rightChestPositionY-blobSize/2, 0x00FF00);
+    RightChestCanvas.DrawRectangle(xSizeRightChest/2 - blobSize, rightChestPositionY-10, xSizeRightChest/2 + blobSize, rightChestPositionY, 0x008800);
+    RightChestCanvas.Fill(xSizeRightChest/2, rightChestPositionY-blobSize/2, 0x008800);
     RightChestCanvas.MeanFilter(3);
     DrawAllMatrices();
     RightChestCanvas.ClearMatrix();
@@ -347,12 +347,12 @@ void DrawWings()
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+4, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+5, ySizeRightBack-1, 0x00FF00);
 
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+1, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+3, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+4, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+5, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i  ,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+1,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+2,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+3,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+4,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+5,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
 
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
     LeftBackCanvas.MeanFilter(3);
@@ -381,12 +381,12 @@ void DrawWings()
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+4, ySizeRightBack-1, 0x00FF00);
     RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+5, ySizeRightBack-1, 0x00FF00);
 
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+1, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+3, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+4, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i+5, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i  ,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+1,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+2,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+3,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+4,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    LeftBackCanvas.DrawLine(i+5,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
 
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
     LeftBackCanvas.MeanFilter(3);
