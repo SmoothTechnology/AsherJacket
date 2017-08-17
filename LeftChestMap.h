@@ -1,9 +1,9 @@
 int xSizeLeftChest = 42;
 int ySizeLeftChest = 26;
 int minLEDLeftChest = 2560;
-int maxLEDLeftChest = 3363;
+int maxLEDLeftChest = 3380;
 
-LEDPos LeftChestMap [804];
+LEDPos LeftChestMap [821];
 
 void InitializeLeftChestMap()
 {
@@ -1613,5 +1613,60 @@ LeftChestMap[3].x = 39;
 LeftChestMap[3].y = 25;
 LeftChestMap[78].x = 40;
 LeftChestMap[78].y = 25;
+
+// Hand Mapped Entering from Left when facing
+LeftChestMap[804].x = 4;
+LeftChestMap[804].y = 7;
+
+LeftChestMap[805].x = 5;
+LeftChestMap[805].y = 7;
+
+LeftChestMap[806].x = 5;
+LeftChestMap[806].y = 7;
+
+LeftChestMap[807].x = 6;
+LeftChestMap[807].y = 7;
+
+LeftChestMap[808].x = 6;
+LeftChestMap[808].y = 7;
+
+LeftChestMap[809].x = 7;
+LeftChestMap[809].y = 7;
+
+LeftChestMap[810].x = 7;
+LeftChestMap[810].y = 7;
+
+// Hand Mapped
+
+LeftChestMap[811].x = 8;
+LeftChestMap[811].y = 7;
+
+LeftChestMap[812].x = 8;
+LeftChestMap[812].y = 7;
+
+LeftChestMap[813].x = 7;
+LeftChestMap[813].y = 7;
+
+LeftChestMap[814].x = 7;
+LeftChestMap[814].y = 7;
+
+LeftChestMap[815].x = 6;
+LeftChestMap[815].y = 7;
+
+LeftChestMap[816].x = 6;
+LeftChestMap[816].y = 7;
+
+LeftChestMap[817].x = 5;
+LeftChestMap[817].y = 7;
+
+LeftChestMap[818].x = 5;
+LeftChestMap[818].y = 7;
+
+LeftChestMap[819].x = 4;
+LeftChestMap[819].y = 7;
+
+LeftChestMap[820].x = 4;
+LeftChestMap[820].y = 7;
+
 }
 

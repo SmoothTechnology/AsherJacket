@@ -271,9 +271,22 @@ void CenterOut()
     LeftChestCanvas.DrawRectangle(xSizeLeftChest/2 - blobSize, leftChestPositionY-10, xSizeLeftChest/2 + blobSize, leftChestPositionY, 0x008800);
     LeftChestCanvas.Fill(xSizeLeftChest/2, leftChestPositionY-blobSize/2, 0x008800);
     LeftChestCanvas.MeanFilter(3);
+
+
+    if(i < 10)
+    {
+      RightArmBackCanvas.DrawRectangle(0, 0, xSizeRightArmBack-1, ySizeRightArmBack-1, 0xFF0000);
+      RightArmFrontPartTwoCanvas.DrawRectangle(0, 0, xSizeRightArmPartTwo-1, ySizeRightArmPartTwo-1, 0xFF0000);
+      RightArmFrontPartOneCanvas.DrawRectangle(0, 0, xSizeRightArmPartOne-1, ySizeRightArmPartTwo-1, 0xFF0000);
+    }
+
+
     DrawAllMatrices();
     RightChestCanvas.ClearMatrix();
     LeftChestCanvas.ClearMatrix();
+    RightArmFrontPartOneCanvas.ClearMatrix();
+    RightArmFrontPartTwoCanvas.ClearMatrix();
+    RightArmBackCanvas.ClearMatrix();
 
     Serial.print("On Frame: ");
     Serial.print(i);
