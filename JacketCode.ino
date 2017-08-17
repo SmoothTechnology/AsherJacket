@@ -765,19 +765,12 @@ void DrawWings()
   
   for(int i = 0; i < 20; i++)
   {
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+1, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+2, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+3, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+4, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+5, ySizeRightBack-1, 0x00FF00);
-
-    LeftBackCanvas.DrawLine(i  ,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+1,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+2,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+3,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+4,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+5,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    for(int j = 0; j < 12; j++)
+    {
+      RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+j, ySizeRightBack-1, Wheel(j*3));
+      LeftBackCanvas.DrawLine(i+j  ,  0, xSizeLeftBack/2, ySizeLeftBack-1, Wheel(j*3));
+    }
+    
 
     int glowLevel = map(i, 0, 20, 0, 50);
     RightChestCanvas.Fill(5, 5, glowLevel);
@@ -790,8 +783,8 @@ void DrawWings()
     LeftArmBackCanvas.Fill(5,5,glowLevel);
 
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
-    LeftBackCanvas.MeanFilter(3);
-    RightBackCanvas.MeanFilter(3);
+    //LeftBackCanvas.MeanFilter(3);
+    //RightBackCanvas.MeanFilter(3);
     //RightBackCanvas.Fill(5,5, 0xAA00AA);
     //RightBackCanvas.Fill(5, 5, 0xFF00FF);
     
@@ -808,19 +801,11 @@ void DrawWings()
   for(int i = 20; i > 0; i--)
   {
 
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+1, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+2, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+3, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+4, ySizeRightBack-1, 0x00FF00);
-    RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+5, ySizeRightBack-1, 0x00FF00);
-
-    LeftBackCanvas.DrawLine(i  ,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+1,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+2,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+3,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+4,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
-    LeftBackCanvas.DrawLine(i+5,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
+    for(int j = 0; j < 12; j++)
+    {
+      RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+j, ySizeRightBack-1, Wheel(j*3));
+      LeftBackCanvas.DrawLine(i+j  ,  0, xSizeLeftBack/2, ySizeLeftBack-1, Wheel(j*3));
+    }
 
     int glowLevel = map(i, 0, 20, 0, 50);
     RightChestCanvas.Fill(5, 5, glowLevel);
@@ -833,8 +818,8 @@ void DrawWings()
     LeftArmBackCanvas.Fill(5,5,glowLevel);
 
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
-    LeftBackCanvas.MeanFilter(3);
-    RightBackCanvas.MeanFilter(3);
+    //LeftBackCanvas.MeanFilter(3);
+    //RightBackCanvas.MeanFilter(3);
     //RightBackCanvas.Fill(5, 5, 0xFF00FF);
     
     //LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, i, 0x00FF00);
@@ -990,8 +975,8 @@ void loop() {
  //StopLight();
  //InitializeMatrices();
 
-  //DrawPlasma();
-  drawPlasma2(frames++);
+  DrawWings();
+  //drawPlasma2(frames++);
 
   //for(int i = 0 ; i < 255; i++)
   //{
