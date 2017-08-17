@@ -169,6 +169,12 @@ void DrawPlasma() {
         + (int8_t)pgm_read_byte(sinetab + (uint8_t)((x4 * x4 + y4 * y4) >> 3));
 
         value %= 1536; 
+
+        //double multiplier = value / 1536.0;
+//
+        //int eachValue = 255 * multiplier;
+        //value << eachValue
+
         byte byteValue = map(value, -1536, 1536, 0, 255);
         value = Wheel(byteValue);
 
@@ -234,6 +240,109 @@ void DrawPlasma() {
   hueShift += 2;
 
   DrawAllMatrices();
+}
+ 
+//uint8_t const cos_wave[256] PROGMEM =  
+//{0,0,0,0,1,1,1,2,2,3,4,5,6,6,8,9,10,11,12,14,15,17,18,20,22,23,25,27,29,31,33,35,38,40,42,
+//45,47,49,52,54,57,60,62,65,68,71,73,76,79,82,85,88,91,94,97,100,103,106,109,113,116,119,
+//122,125,128,131,135,138,141,144,147,150,153,156,159,162,165,168,171,174,177,180,183,186,
+//189,191,194,197,199,202,204,207,209,212,214,216,218,221,223,225,227,229,231,232,234,236,
+//238,239,241,242,243,245,246,247,248,249,250,251,252,252,253,253,254,254,255,255,255,255,
+//255,255,255,255,254,254,253,253,252,252,251,250,249,248,247,246,245,243,242,241,239,238,
+//236,234,232,231,229,227,225,223,221,218,216,214,212,209,207,204,202,199,197,194,191,189,
+//186,183,180,177,174,171,168,165,162,159,156,153,150,147,144,141,138,135,131,128,125,122,
+//119,116,113,109,106,103,100,97,94,91,88,85,82,79,76,73,71,68,65,62,60,57,54,52,49,47,45,
+//42,40,38,35,33,31,29,27,25,23,22,20,18,17,15,14,12,11,10,9,8,6,6,5,4,3,2,2,1,1,1,0,0,0,0
+//};
+
+uint8_t const cos_wave[256] PROGMEM = {
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,6,10,13,17,20,24,27,30,34,37,41,44,47,50,54,57,60,63,66,69,72,75,78,81,84,87,90,93,95,98,101,103,106,108,110,113,115,117,119,121,123,125,127,129,131,132,134,135,137,138,139,141,142,143,144,145,146,146,147,148,148,149,149,149,149,149,150,149,149,149,149,149,148,148,147,146,146,145,144,143,142,141,139,138,137,135,134,132,131,129,127,125,123,121,119,117,115,113,110,108,106,103,101,98,95,93,90,87,84,81,78,75,72,69,66,63,60,57,54,50,47,44,41,37,34,30,27,24,20,17,13,10,6,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+ 
+inline uint8_t fastCosineCalc( uint16_t preWrapVal)
+{
+  uint8_t wrapVal = (preWrapVal % 255);
+  if (wrapVal<0) wrapVal=255+wrapVal;
+  return (pgm_read_byte_near(cos_wave+wrapVal)); 
+}
+ 
+void drawPlasma2(int frameCount) {
+    uint16_t t = fastCosineCalc((92 * frameCount)/100);  //time displacement - fiddle with these til it looks good...
+    uint16_t t2 = fastCosineCalc((55 * frameCount)/100); 
+    uint16_t t3 = fastCosineCalc((83 * frameCount)/100);
+    for (uint8_t y = 0; y <= 60; y++)
+    {
+       for (uint8_t x = 0; x <= 60; x++) 
+       {
+          uint8_t r = fastCosineCalc(((x << 3) + (t >> 1) + fastCosineCalc((t2 + (y << 3)))));  //Calculate 3 seperate plasma waves, one for each color channel
+          uint8_t g = fastCosineCalc(((y << 3) + t + fastCosineCalc(((t3 >> 2) + (x << 3)))));
+          uint8_t b = fastCosineCalc(((y << 3) + t2 + fastCosineCalc((t + x + (g >> 2)))));
+          //uncomment the following to enable gamma correction
+         // r=pgm_read_byte_near(exp_gamma+r);  
+         // g=pgm_read_byte_near(exp_gamma+g);
+         // b=pgm_read_byte_near(exp_gamma+b);
+         // drawPixel(x,y,CRGB(r,g,b));  // Is this the fastest method to update the draw buffer with colors? 
+
+         //r = r*0.01;
+         //r = r*100;
+
+         r = r*0.25;
+         int value = r << 16 | r << 8 | r;
+
+        if(x < xSizeRightChest && y < ySizeRightChest)
+        {
+          
+          RightChestCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeLeftChest && y < ySizeLeftChest)
+        {
+          LeftChestCanvas.SetPixelAt(x, y, value);
+        }
+        
+        if(x < xSizeLeftArmBack && y < ySizeLeftArmBack)
+        {
+          LeftArmBackCanvas.SetPixelAt(x,y,value);
+        }
+
+        if(x < xSizeLeftArmPartTwo && y < ySizeLeftArmPartTwo)
+        {
+          LeftArmFrontPartTwoCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeLeftArmFrontPartOne && y < ySizeLeftArmFrontPartOne)
+        {
+          LeftArmFrontPartOneCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeLeftBack && y < ySizeLeftBack)
+        {
+          LeftBackCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeRightBack && y < ySizeRightBack)
+        {
+          RightBackCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeRightArmBack && y < ySizeRightArmBack)
+        {
+          RightArmBackCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeRightArmPartOne && y < ySizeRightArmPartOne)
+        {
+          RightArmFrontPartOneCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeRightArmPartTwo && y < ySizeRightArmPartTwo)
+        {
+          RightArmFrontPartTwoCanvas.SetPixelAt(x, y, value);
+        }
+ 
+      }
+    }
+    DrawAllMatrices();
 }
 
 
@@ -804,6 +913,7 @@ void StopLight()
   
 }
 
+int frames = 0;
 void loop() {
   //int microsec = 0;  // change them all in 2 seconds
 //
@@ -874,7 +984,15 @@ void loop() {
  //StopLight();
  //InitializeMatrices();
 
-  DrawPlasma();
+  //DrawPlasma();
+  drawPlasma2(frames++);
+
+  //for(int i = 0 ; i < 255; i++)
+  //{
+  //  LeftChestCanvas.Fill(5, 5, Wheel(i));
+  //  DrawAllMatrices();
+  //}
+  
 }
 
 void lightAll(int color)
