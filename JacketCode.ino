@@ -159,9 +159,9 @@ void DrawPlasma() {
   y3  = (int)(sin(angle3) * radius3 + centery3);
   y4  = (int)(sin(angle4) * radius4 + centery4);
 
-  for(y=0; y< ySizeRightChest; y++) {
+  for(y=0; y< 60; y++) {
     x1 = sx1; x2 = sx2; x3 = sx3; x4 = sx4;
-    for(x=0; x<xSizeRightChest; x++) {
+    for(x=0; x<60; x++) {
       value = hueShift
         + (int8_t)pgm_read_byte(sinetab + (uint8_t)((x1 * x1 + y1 * y1) >> 2))
         + (int8_t)pgm_read_byte(sinetab + (uint8_t)((x2 * x2 + y2 * y2) >> 2))
@@ -171,7 +171,56 @@ void DrawPlasma() {
         value %= 1536; 
         byte byteValue = map(value, -1536, 1536, 0, 255);
         value = Wheel(byteValue);
-        RightChestCanvas.SetPixelAt(x, y, value);
+
+        if(x < xSizeRightChest && y < ySizeRightChest)
+        {
+          RightChestCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeLeftChest && y < ySizeLeftChest)
+        {
+          LeftChestCanvas.SetPixelAt(x, y, value);
+        }
+        
+        if(x < xSizeLeftArmBack && y < ySizeLeftArmBack)
+        {
+          LeftArmBackCanvas.SetPixelAt(x,y,value);
+        }
+
+        if(x < xSizeLeftArmPartTwo && y < ySizeLeftArmPartTwo)
+        {
+          LeftArmFrontPartTwoCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeLeftArmFrontPartOne && y < ySizeLeftArmFrontPartOne)
+        {
+          LeftArmFrontPartOneCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeLeftBack && y < ySizeLeftBack)
+        {
+          LeftBackCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeRightBack && y < ySizeRightBack)
+        {
+          RightBackCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeRightArmBack && y < ySizeRightArmBack)
+        {
+          RightArmBackCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeRightArmPartOne && y < ySizeRightArmPartOne)
+        {
+          RightArmFrontPartOneCanvas.SetPixelAt(x, y, value);
+        }
+
+        if(x < xSizeRightArmPartTwo && y < ySizeRightArmPartTwo)
+        {
+          RightArmFrontPartTwoCanvas.SetPixelAt(x, y, value);
+        }
 
       x1--; x2--; x3--; x4--;
     }
