@@ -443,6 +443,16 @@ void DrawWings()
     LeftBackCanvas.DrawLine(i+4,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
     LeftBackCanvas.DrawLine(i+5,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
 
+    int glowLevel = map(i, 0, 20, 0, 50);
+    RightChestCanvas.Fill(5, 5, glowLevel);
+    LeftChestCanvas.Fill(5, 5, glowLevel);
+    RightArmFrontPartOneCanvas.Fill(5, 5, glowLevel);
+    RightArmFrontPartTwoCanvas.Fill(5, 5, glowLevel);
+    RightArmBackCanvas.Fill(5,5,glowLevel);
+    LeftArmFrontPartOneCanvas.Fill(5,5, glowLevel);
+    LeftArmFrontPartTwoCanvas.Fill(5,5,glowLevel);
+    LeftArmBackCanvas.Fill(5,5,glowLevel);
+
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
     LeftBackCanvas.MeanFilter(3);
     RightBackCanvas.MeanFilter(3);
@@ -451,8 +461,7 @@ void DrawWings()
     
     //LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, i, 0x00FF00);
     DrawAllMatrices();
-    RightBackCanvas.ClearMatrix();
-    LeftBackCanvas.ClearMatrix();
+    InitializeMatrices();
     delay(20);
 //  
   Serial.print(i);
@@ -477,6 +486,16 @@ void DrawWings()
     LeftBackCanvas.DrawLine(i+4,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
     LeftBackCanvas.DrawLine(i+5,  0, xSizeLeftBack/2, ySizeLeftBack-1, 0x00FF00);
 
+    int glowLevel = map(i, 0, 20, 0, 50);
+    RightChestCanvas.Fill(5, 5, glowLevel);
+    LeftChestCanvas.Fill(5, 5, glowLevel);
+    RightArmFrontPartOneCanvas.Fill(5, 5, glowLevel);
+    RightArmFrontPartTwoCanvas.Fill(5, 5, glowLevel);
+    RightArmBackCanvas.Fill(5,5,glowLevel);
+    LeftArmFrontPartOneCanvas.Fill(5,5, glowLevel);
+    LeftArmFrontPartTwoCanvas.Fill(5,5,glowLevel);
+    LeftArmBackCanvas.Fill(5,5,glowLevel);
+
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
     LeftBackCanvas.MeanFilter(3);
     RightBackCanvas.MeanFilter(3);
@@ -484,8 +503,7 @@ void DrawWings()
     
     //LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, i, 0x00FF00);
     DrawAllMatrices();
-    RightBackCanvas.ClearMatrix();
-    LeftBackCanvas.ClearMatrix();
+    InitializeMatrices();
     delay(20);
 //  
   Serial.print(i);
@@ -512,18 +530,57 @@ void LightUpAllCanvases()
 
 void StopLight()
 {
-  LeftArmBackCanvas.Fill(5, 5, 0x110000);      
-  LeftArmFrontPartTwoCanvas.Fill(5, 5, 0x110000);  
-  LeftArmFrontPartOneCanvas.Fill(5, 5, 0x110000);   
-  LeftBackCanvas.Fill(5, 5, 0x110000);              
-  LeftChestCanvas.Fill(5, 5, 0x110000);             
-  RightArmBackCanvas.Fill(5, 5, 0x110000);          
-  RightArmFrontPartOneCanvas.Fill(5, 5, 0x110000);  
-  RightArmFrontPartTwoCanvas.Fill(5, 5, 0x110000);  
-  RightBackCanvas.Fill(5, 5, 0x110000);             
-  RightChestCanvas.Fill(5, 5, 0x110000);
 
-  DrawAllMatrices();
+
+  for(int i = 0; i < 10; i++)
+  {
+    int glowLevel = map(i, 0, 10, 0, 0x11);
+
+    int colorValue = glowLevel << 16;
+    colorValue = colorValue & 0xFF0000;
+
+    LeftArmBackCanvas.Fill(5, 5, colorValue);      
+    LeftArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
+    LeftArmFrontPartOneCanvas.Fill(5, 5, colorValue);   
+    LeftBackCanvas.Fill(5, 5, colorValue);              
+    LeftChestCanvas.Fill(5, 5, colorValue);             
+    RightArmBackCanvas.Fill(5, 5, colorValue);          
+    RightArmFrontPartOneCanvas.Fill(5, 5, colorValue);  
+    RightArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
+    RightBackCanvas.Fill(5, 5, colorValue);             
+    RightChestCanvas.Fill(5, 5, colorValue);
+
+    DrawAllMatrices();
+
+    InitializeMatrices();
+  }
+
+  delay(1000);
+
+  for(int i = 0; i < 10; i++)
+  {
+    int glowLevel = map(i, 10, 0, 0, 0x11);
+
+    int colorValue = glowLevel << 16;
+    colorValue = colorValue & 0xFF0000;
+
+    LeftArmBackCanvas.Fill(5, 5, colorValue);      
+    LeftArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
+    LeftArmFrontPartOneCanvas.Fill(5, 5, colorValue);   
+    LeftBackCanvas.Fill(5, 5, colorValue);              
+    LeftChestCanvas.Fill(5, 5, colorValue);             
+    RightArmBackCanvas.Fill(5, 5, colorValue);          
+    RightArmFrontPartOneCanvas.Fill(5, 5, colorValue);  
+    RightArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
+    RightBackCanvas.Fill(5, 5, colorValue);             
+    RightChestCanvas.Fill(5, 5, colorValue);
+
+    DrawAllMatrices();
+
+    InitializeMatrices();
+  }
+
+  
 }
 
 void loop() {
@@ -594,7 +651,6 @@ void loop() {
   InitializeMatrices();
 
   StopLight();
-  delay(2000);
   InitializeMatrices();
 }
 
