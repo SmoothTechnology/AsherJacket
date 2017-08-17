@@ -326,17 +326,41 @@ void CenterOut()
 
 void TurnLeft()
 {
-    for(int i = 20; i > 0; i--)
-  {
-    int leftChestPositionY = map(i, 20, 0, 10, ySizeLeftChest-1);
 
-    int blobSize = map(i, 20, 0, 2, 10);
+  int maxFrames = 20;
+  int armTrigger = maxFrames;
+
+  for(int i = maxFrames; i > 0; i--)
+  {
+    int leftChestPositionY = map(i, maxFrames, 0, 10, ySizeLeftChest-1);
+
+    int blobSize = map(i, maxFrames, 0, 2, 10);
 
     LeftChestCanvas.DrawRectangle(xSizeLeftChest/2 - blobSize, leftChestPositionY-10, xSizeLeftChest/2 + blobSize, leftChestPositionY, 0x008800);
     LeftChestCanvas.Fill(xSizeLeftChest/2, leftChestPositionY-blobSize/2, 0x008800);
     LeftChestCanvas.MeanFilter(3);
+
+    if(i < armTrigger)
+    {
+      // Left Arms
+      int leftArmBackPos = map(i, armTrigger, 0, 5, xSizeLeftArmBack-1);
+      LeftArmBackCanvas.DrawRectangle(leftArmBackPos - 5, 0, leftArmBackPos, ySizeLeftArmBack-1, 0xFF0000);
+      LeftArmBackCanvas.Fill(leftArmBackPos-2, ySizeLeftArmBack/2, 0xFF0000);
+
+      int leftArmFrontPartTwoPos = map(i, armTrigger, 0, 5, xSizeLeftArmPartTwo-1);
+      LeftArmFrontPartTwoCanvas.DrawRectangle(leftArmFrontPartTwoPos-5, 0, leftArmFrontPartTwoPos-1, ySizeLeftArmPartTwo-1, 0xFF0000);
+      LeftArmFrontPartTwoCanvas.Fill(leftArmFrontPartTwoPos-2, ySizeLeftArmPartTwo/2, 0xFF0000);
+
+      int leftArmFrontPartOnePos = map(i, armTrigger, 0, 5, xSizeLeftArmFrontPartOne-1);
+      LeftArmFrontPartOneCanvas.DrawRectangle(leftArmFrontPartOnePos-5, 0, leftArmFrontPartOnePos-1, ySizeLeftArmFrontPartOne-1, 0xFF0000);
+      LeftArmFrontPartOneCanvas.Fill(leftArmFrontPartOnePos-2, ySizeLeftArmFrontPartOne/2, 0xFF0000);
+    }
+
     DrawAllMatrices();
     LeftChestCanvas.ClearMatrix();
+    LeftArmBackCanvas.ClearMatrix();
+    LeftArmFrontPartTwoCanvas.ClearMatrix();
+    LeftArmFrontPartOneCanvas.ClearMatrix();
 
     Serial.print("On Frame: ");
     Serial.print(i);
@@ -347,17 +371,41 @@ void TurnLeft()
 
 void TurnRight()
 {
-    for(int i = 20; i > 0; i--)
-  {
-    int rightChestPositionY = map(i, 0, 20, 10, ySizeRightChest-1);
 
-    int blobSize = map(i, 20, 0, 2, 10);
+  int maxFrames = 20;
+  int armTrigger = maxFrames;
+
+  for(int i = maxFrames; i > 0; i--)
+  {
+    int rightChestPositionY = map(i, 0, maxFrames, 10, ySizeRightChest-1);
+
+    int blobSize = map(i, maxFrames, 0, 2, 10);
 
     RightChestCanvas.DrawRectangle(xSizeRightChest/2 - blobSize, rightChestPositionY-10, xSizeRightChest/2 + blobSize, rightChestPositionY, 0x008800);
     RightChestCanvas.Fill(xSizeRightChest/2, rightChestPositionY-blobSize/2, 0x008800);
     RightChestCanvas.MeanFilter(3);
+
+    if(i < armTrigger)
+    {
+      // Right Arms
+      int rightArmBackPos = map(i, armTrigger, 0, 5, xSizeRightArmBack-1);
+      RightArmBackCanvas.DrawRectangle(rightArmBackPos - 5, 0, rightArmBackPos, ySizeRightArmBack-1, 0xFF0000);
+      RightArmBackCanvas.Fill(rightArmBackPos-2, ySizeRightArmBack/2, 0xFF0000);
+
+      int rightArmFrontPartTwoPos = map(i, armTrigger, 0, 5, xSizeRightArmPartTwo-1);
+      RightArmFrontPartTwoCanvas.DrawRectangle(rightArmFrontPartTwoPos-5, 0, rightArmFrontPartTwoPos-1, ySizeRightArmPartTwo-1, 0xFF0000);
+      RightArmFrontPartTwoCanvas.Fill(rightArmFrontPartTwoPos-2, ySizeRightArmPartTwo/2, 0xFF0000);
+
+      int rightArmFrontPartOnePos = map(i, armTrigger, 0, 5, xSizeRightArmPartOne-1);
+      RightArmFrontPartOneCanvas.DrawRectangle(rightArmFrontPartOnePos-5, 0, rightArmFrontPartOnePos-1, ySizeRightArmPartOne-1, 0xFF0000);
+      RightArmFrontPartOneCanvas.Fill(rightArmFrontPartOnePos-2, ySizeRightArmPartOne/2, 0xFF0000);
+    }
+
     DrawAllMatrices();
     RightChestCanvas.ClearMatrix();
+    RightArmFrontPartOneCanvas.ClearMatrix();
+    RightArmFrontPartTwoCanvas.ClearMatrix();
+    RightArmBackCanvas.ClearMatrix();
 
     Serial.print("On Frame: ");
     Serial.print(i);
