@@ -208,6 +208,52 @@ void MatrixDraw::MeanFilter(int kernel)
 	}
 }
 
+void MatrixDraw::MeanFilterByColor(int kernel)
+{
+	if(kernel % 2 == 0)
+		return;
+
+	int filterDivisor = kernel*kernel;
+
+	for(int x = 0; x < xSize; x++)
+	{
+		for(int y = 0; y < ySize; y++)
+		{
+			int rSum = 0;
+			int gSum = 0;
+			int bSum = 0;
+			for(int xx = 0; xx < kernel; xx++)
+			{
+				for(int yy = 0; yy < kernel; yy++)
+				{
+					int curX = x + (kernel / -2) + xx;
+					int curY = y + (kernel / -2) + yy;
+
+					if(curX > 0 && curX < xSize && curY > 0 && curY < ySize)
+					{
+						rSum += (Canvas[curX][curY] >> 16) & 0xFF;
+						gSum += (Canvas[curX][curY] >> 8) & 0xFF;
+						bSum += (Canvas[curX][curY]) & 0xFF;
+					}
+				}
+			}
+			int rAverage = rSum/filterDivisor;
+			int gAverage = gSum/filterDivisor;
+			int bAverage = bSum/filterDivisor;
+
+			OutputCanvas[x][y] = rAverage << 16 | gAverage << 8 | bAverage;
+		}
+	}
+
+	for(int x = 0; x < xSize; x++)
+	{
+		for(int y = 0; y < ySize; y++)
+		{
+			Canvas[x][y] = OutputCanvas[x][y];
+		}
+	}
+}
+
 void MatrixDraw::ClearMatrix()
 {
 	for(int x = 0; x < xSize; x++)

@@ -1,9 +1,9 @@
 int xSizeRightChest = 36;
 int ySizeRightChest = 18;
 int minLEDRightChest = 1280;
-int maxLEDRightChest = 2152;
+int maxLEDRightChest = 2171;
 
-LEDPos RightChestMap [873];
+LEDPos RightChestMap [892];
 
 void InitializeRightChestMap()
 {
@@ -1751,5 +1751,64 @@ RightChestMap[831].x = 29;
 RightChestMap[831].y = 17;
 RightChestMap[832].x = 30;
 RightChestMap[832].y = 17;
+
+// Hand Mapped Entering on Left when facing
+RightChestMap[873].x = 8;
+RightChestMap[873].y = 10;
+
+RightChestMap[874].x = 8;
+RightChestMap[874].y = 10;
+
+RightChestMap[875].x = 7;
+RightChestMap[875].y = 10;
+
+RightChestMap[876].x = 7;
+RightChestMap[876].y = 10;
+
+RightChestMap[877].x = 6;
+RightChestMap[877].y = 10;
+
+RightChestMap[878].x = 6;
+RightChestMap[878].y = 10;
+
+RightChestMap[879].x = 5;
+RightChestMap[879].y = 10;
+
+RightChestMap[880].x = 5;
+RightChestMap[880].y = 10;
+
+RightChestMap[881].x = 4;
+RightChestMap[881].y = 10;
+
+RightChestMap[882].x = 4;
+RightChestMap[882].y = 10;
+
+RightChestMap[883].x = 3;
+RightChestMap[883].y = 10;
+
+RightChestMap[884].x = 3;
+RightChestMap[884].y = 10;
+
+// Hand Mapped
+RightChestMap[885].x = 5;
+RightChestMap[885].y = 11;
+
+RightChestMap[886].x = 6;
+RightChestMap[886].y = 11;
+
+RightChestMap[887].x = 6;
+RightChestMap[887].y = 11;
+
+RightChestMap[888].x = 7;
+RightChestMap[888].y = 11;
+
+RightChestMap[889].x = 7;
+RightChestMap[889].y = 11;
+
+RightChestMap[890].x = 8;
+RightChestMap[890].y = 11;
+
+RightChestMap[891].x = 8;
+RightChestMap[891].y = 11;
 }
 
