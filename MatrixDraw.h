@@ -21,6 +21,7 @@ public:
 	void Bilinear(int x1, int y1, int x2, int y2, float q11, float q12, float q21, float q22);
 
 	void MeanFilter(int kernel);
+	void MeanFilterByColor(int kernel);
 
 	void ClearMatrix();
 private:

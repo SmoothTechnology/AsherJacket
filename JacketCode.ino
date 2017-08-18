@@ -762,6 +762,8 @@ void DrawWings()
   //  delay(100);
   //  Serial.println("Drawing Wings 1");
   //}
+
+  int armTrigger = 20;
   
   for(int i = 0; i < 20; i++)
   {
@@ -770,7 +772,6 @@ void DrawWings()
       RightBackCanvas.DrawLine(xSizeRightBack/2, 0, i+j, ySizeRightBack-1, Wheel(j*3));
       LeftBackCanvas.DrawLine(i+j  ,  0, xSizeLeftBack/2, ySizeLeftBack-1, Wheel(j*3));
     }
-    
 
     int glowLevel = map(i, 0, 20, 0, 50);
     RightChestCanvas.Fill(5, 5, glowLevel);
@@ -783,8 +784,8 @@ void DrawWings()
     LeftArmBackCanvas.Fill(5,5,glowLevel);
 
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
-    //LeftBackCanvas.MeanFilter(3);
-    //RightBackCanvas.MeanFilter(3);
+    LeftBackCanvas.MeanFilterByColor(3);
+    RightBackCanvas.MeanFilterByColor(3);
     //RightBackCanvas.Fill(5,5, 0xAA00AA);
     //RightBackCanvas.Fill(5, 5, 0xFF00FF);
     
@@ -807,6 +808,34 @@ void DrawWings()
       LeftBackCanvas.DrawLine(i+j  ,  0, xSizeLeftBack/2, ySizeLeftBack-1, Wheel(j*3));
     }
 
+
+    // Right Arms
+    int rightArmBackPos = map(i, armTrigger, 0, 5, xSizeRightArmBack-1);
+    RightArmBackCanvas.DrawRectangle(rightArmBackPos - 5, 0, rightArmBackPos, ySizeRightArmBack-1, 0xFFAA00);
+    RightArmBackCanvas.Fill(rightArmBackPos-2, ySizeRightArmBack/2, 0xFFAA00);
+
+    int rightArmFrontPartTwoPos = map(i, armTrigger, 0, 5, xSizeRightArmPartTwo-1);
+    RightArmFrontPartTwoCanvas.DrawRectangle(rightArmFrontPartTwoPos-5, 0, rightArmFrontPartTwoPos-1, ySizeRightArmPartTwo-1, 0xFFAA00);
+    RightArmFrontPartTwoCanvas.Fill(rightArmFrontPartTwoPos-2, ySizeRightArmPartTwo/2, 0xFFAA00);
+
+    int rightArmFrontPartOnePos = map(i, armTrigger, 0, 5, xSizeRightArmPartOne-1);
+    RightArmFrontPartOneCanvas.DrawRectangle(rightArmFrontPartOnePos-5, 0, rightArmFrontPartOnePos-1, ySizeRightArmPartOne-1, 0xFFAA00);
+    RightArmFrontPartOneCanvas.Fill(rightArmFrontPartOnePos-2, ySizeRightArmPartOne/2, 0xFFAA00);
+
+    // Left Arms
+    int leftArmBackPos = map(i, armTrigger, 0, 5, xSizeLeftArmBack-1);
+    LeftArmBackCanvas.DrawRectangle(leftArmBackPos - 5, 0, leftArmBackPos, ySizeLeftArmBack-1, 0xFFAA00);
+    LeftArmBackCanvas.Fill(leftArmBackPos-2, ySizeLeftArmBack/2, 0xFFAA00);
+
+    int leftArmFrontPartTwoPos = map(i, armTrigger, 0, 5, xSizeLeftArmPartTwo-1);
+    LeftArmFrontPartTwoCanvas.DrawRectangle(leftArmFrontPartTwoPos-5, 0, leftArmFrontPartTwoPos-1, ySizeLeftArmPartTwo-1, 0xFFAA00);
+    LeftArmFrontPartTwoCanvas.Fill(leftArmFrontPartTwoPos-2, ySizeLeftArmPartTwo/2, 0xFFAA00);
+
+    int leftArmFrontPartOnePos = map(i, armTrigger, 0, 5, xSizeLeftArmFrontPartOne-1);
+    LeftArmFrontPartOneCanvas.DrawRectangle(leftArmFrontPartOnePos-5, 0, leftArmFrontPartOnePos-1, ySizeLeftArmFrontPartOne-1, 0xFFAA00);
+    LeftArmFrontPartOneCanvas.Fill(leftArmFrontPartOnePos-2, ySizeLeftArmFrontPartOne/2, 0xFFAA00);
+
+
     int glowLevel = map(i, 0, 20, 0, 50);
     RightChestCanvas.Fill(5, 5, glowLevel);
     LeftChestCanvas.Fill(5, 5, glowLevel);
@@ -818,8 +847,8 @@ void DrawWings()
     LeftArmBackCanvas.Fill(5,5,glowLevel);
 
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
-    //LeftBackCanvas.MeanFilter(3);
-    //RightBackCanvas.MeanFilter(3);
+    LeftBackCanvas.MeanFilterByColor(3);
+    RightBackCanvas.MeanFilterByColor(3);
     //RightBackCanvas.Fill(5, 5, 0xFF00FF);
     
     //LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, i, 0x00FF00);
