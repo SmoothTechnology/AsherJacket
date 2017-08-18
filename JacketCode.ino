@@ -53,6 +53,8 @@
 #include "ShoulderLeftMap.h"
 #include "ShoulderRightMap.h"
 
+int turnSignals = 0;
+
 const int ledsPerStrip = 1280;
 
 DMAMEM int displayMemory[ledsPerStrip*8];
@@ -498,22 +500,48 @@ void DrawRightChestMatrix()
 
 void DrawRightShoulderMatrix()
 {
-  for(int i = minLEDRightShoulder+34; i < maxLEDRightShoulder+1; i++)
+  if(turnSignals)
   {
-    LEDPos curPos = RightShoulderMap[i - minLEDRightShoulder];
-    int value = RightShoulderCanvas.GetValueAt(curPos.x, curPos.y);
-    leds.setPixel(i, value);
+    for(int i = minLEDRightShoulder+34; i < maxLEDRightShoulder+1; i++)
+    {
+      LEDPos curPos = RightShoulderMap[i - minLEDRightShoulder];
+      int value = RightShoulderCanvas.GetValueAt(curPos.x, curPos.y);
+      leds.setPixel(i, value);
+    }
   }
+  else
+  {
+    for(int i = minLEDRightShoulder; i < maxLEDRightShoulder+1; i++)
+    {
+      LEDPos curPos = RightShoulderMap[i - minLEDRightShoulder];
+      int value = RightShoulderCanvas.GetValueAt(curPos.x, curPos.y);
+      leds.setPixel(i, value);
+    }
+  }
+  
 }
 
 void DrawLeftShoulderMatrix()
 {
-  for(int i = minLEDLeftShoulder+37; i < maxLEDLeftShoulder+1; i++)
+  if(turnSignals)
   {
-    LEDPos curPos = LeftShoulderMap[i - minLEDLeftShoulder];
-    int value = LeftShoulderCanvas.GetValueAt(curPos.x, curPos.y);
-    leds.setPixel(i, value);
+    for(int i = minLEDLeftShoulder+37; i < maxLEDLeftShoulder+1; i++)
+    {
+      LEDPos curPos = LeftShoulderMap[i - minLEDLeftShoulder];
+      int value = LeftShoulderCanvas.GetValueAt(curPos.x, curPos.y);
+      leds.setPixel(i, value);
+    }
   }
+  else
+  {
+      for(int i = minLEDLeftShoulder; i < maxLEDLeftShoulder+1; i++)
+      {
+        LEDPos curPos = LeftShoulderMap[i - minLEDLeftShoulder];
+        int value = LeftShoulderCanvas.GetValueAt(curPos.x, curPos.y);
+        leds.setPixel(i, value);
+      }
+  }
+  
 }
 
 void DrawAllMatrices()
@@ -754,6 +782,7 @@ void TurnRight()
 
 void TurnRightNewShoulders()
 {
+  turnSignals = 1;
   int maxFrames = 20;
   int startX = 15;
   int startY = 13;
@@ -787,10 +816,12 @@ void TurnRightNewShoulders()
 
     RightShoulderCanvas.ClearMatrix();
   }
+  turnSignals= 0;
 }
 
 void TurnLeftNewShoulders()
 {
+  turnSignals = 1;
   int maxFrames = 20;
   int startX = 15;
   int startY = 6;
@@ -825,6 +856,7 @@ void TurnLeftNewShoulders()
 
     LeftShoulderCanvas.ClearMatrix();
   }
+  turnSignals = 0;
 }
 
 void DrawWings()
