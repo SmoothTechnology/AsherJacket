@@ -498,7 +498,7 @@ void DrawRightChestMatrix()
 
 void DrawRightShoulderMatrix()
 {
-  for(int i = minLEDRightShoulder; i < maxLEDRightShoulder+1; i++)
+  for(int i = minLEDRightShoulder+34; i < maxLEDRightShoulder+1; i++)
   {
     LEDPos curPos = RightShoulderMap[i - minLEDRightShoulder];
     int value = RightShoulderCanvas.GetValueAt(curPos.x, curPos.y);
@@ -508,7 +508,7 @@ void DrawRightShoulderMatrix()
 
 void DrawLeftShoulderMatrix()
 {
-  for(int i = minLEDLeftShoulder; i < maxLEDLeftShoulder+1; i++)
+  for(int i = minLEDLeftShoulder+37; i < maxLEDLeftShoulder+1; i++)
   {
     LEDPos curPos = LeftShoulderMap[i - minLEDLeftShoulder];
     int value = LeftShoulderCanvas.GetValueAt(curPos.x, curPos.y);
