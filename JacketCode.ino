@@ -755,10 +755,10 @@ void TurnRight()
 void TurnRightNewShoulders()
 {
   int maxFrames = 20;
-  int startX = 13;
-  int startY = 10;
-  int endX = 17;
-  int endY = 16;
+  int startX = 15;
+  int startY = 13;
+  int endX = 16;
+  int endY = 14;
 
   for(int i = 0; i < maxFrames; i++)
   { 
@@ -776,8 +776,11 @@ void TurnRightNewShoulders()
     if(YDrawEnd > ySizeRightShoulder - 1)
       YDrawEnd = ySizeRightShoulder - 1;
 
-    RightShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, 0x00FF00);
-    RightShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, 0x00FF00);
+    int greenLevel = map(i, maxFrames, 0, 0, 255);
+    int color = greenLevel << 8;
+    color = color & 0x00FF00;
+    RightShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, color);
+    RightShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
     drawPlasma2(masterFrame++);
 
     DrawAllMatrices();
@@ -789,10 +792,10 @@ void TurnRightNewShoulders()
 void TurnLeftNewShoulders()
 {
   int maxFrames = 20;
-  int startX = 11;
+  int startX = 15;
   int startY = 6;
-  int endX = 18;
-  int endY = 12;
+  int endX = 16;
+  int endY = 8;
 
   for(int i = 0; i < maxFrames; i++)
   { 
@@ -810,8 +813,12 @@ void TurnLeftNewShoulders()
     if(YDrawEnd > ySizeLeftShoulder - 1)
       YDrawEnd = ySizeLeftShoulder - 1;
 
-    LeftShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, 0x00FF00);
-    LeftShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, 0x00FF00);
+    int greenLevel = map(i, maxFrames, 0, 0, 255);
+    int color = greenLevel << 8;
+    color = color & 0x00FF00;
+    
+    LeftShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, color);
+    LeftShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
     drawPlasma2(masterFrame++);
 
     DrawAllMatrices();
