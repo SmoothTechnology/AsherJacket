@@ -348,7 +348,7 @@ void drawPlasma2(int frameCount) {
  
       }
     }
-    DrawAllMatrices();
+    //DrawAllMatrices();
 }
 
 
@@ -750,6 +750,31 @@ void TurnRight()
   }
 }
 
+void TurnRightNewShoulders()
+{
+  int maxFrames = 20;
+  int startX = 13;
+  int startY = 10;
+  int endX = 17;
+  int endY = 16;
+
+  for(int i = 0; i < maxFrames; i++)
+  { 
+    int xDrawStart = startX - i;
+    int yDrawStart = startY - i;
+    int xDrawEnd = endX + i;
+    int YDrawEnd = endY + i;
+
+    RightShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, 0x00FF00);
+    RightShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, 0x00FF00);
+    drawPlasma2(i*3);
+
+    DrawAllMatrices();
+
+    RightShoulderCanvas.ClearMatrix();
+  }
+}
+
 void DrawWings()
 {
   //for(int i = 0; i < 13; i++)
@@ -776,12 +801,12 @@ void DrawWings()
     int glowLevel = map(i, 0, 20, 0, 50);
     RightChestCanvas.Fill(5, 5, glowLevel);
     LeftChestCanvas.Fill(5, 5, glowLevel);
-    RightArmFrontPartOneCanvas.Fill(5, 5, glowLevel);
-    RightArmFrontPartTwoCanvas.Fill(5, 5, glowLevel);
-    RightArmBackCanvas.Fill(5,5,glowLevel);
-    LeftArmFrontPartOneCanvas.Fill(5,5, glowLevel);
-    LeftArmFrontPartTwoCanvas.Fill(5,5,glowLevel);
-    LeftArmBackCanvas.Fill(5,5,glowLevel);
+    //RightArmFrontPartOneCanvas.Fill(5, 5, glowLevel);
+    //RightArmFrontPartTwoCanvas.Fill(5, 5, glowLevel);
+    //RightArmBackCanvas.Fill(5,5,glowLevel);
+    //LeftArmFrontPartOneCanvas.Fill(5,5, glowLevel);
+    //LeftArmFrontPartTwoCanvas.Fill(5,5,glowLevel);
+    //LeftArmBackCanvas.Fill(5,5,glowLevel);
 
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
     LeftBackCanvas.MeanFilterByColor(3);
@@ -839,12 +864,12 @@ void DrawWings()
     int glowLevel = map(i, 0, 20, 0, 50);
     RightChestCanvas.Fill(5, 5, glowLevel);
     LeftChestCanvas.Fill(5, 5, glowLevel);
-    RightArmFrontPartOneCanvas.Fill(5, 5, glowLevel);
-    RightArmFrontPartTwoCanvas.Fill(5, 5, glowLevel);
-    RightArmBackCanvas.Fill(5,5,glowLevel);
-    LeftArmFrontPartOneCanvas.Fill(5,5, glowLevel);
-    LeftArmFrontPartTwoCanvas.Fill(5,5,glowLevel);
-    LeftArmBackCanvas.Fill(5,5,glowLevel);
+    //RightArmFrontPartOneCanvas.Fill(0, 0, glowLevel);
+    //RightArmFrontPartTwoCanvas.Fill(0, 0, glowLevel);
+    //RightArmBackCanvas.Fill(0,0,glowLevel);
+    //LeftArmFrontPartOneCanvas.Fill(0,0, glowLevel);
+    //LeftArmFrontPartTwoCanvas.Fill(0,0,glowLevel);
+    //LeftArmBackCanvas.Fill(0,0,glowLevel);
 
     //RightBackCanvas.Fill(30, 5, 0xFF0000);
     LeftBackCanvas.MeanFilterByColor(3);
@@ -1003,7 +1028,7 @@ void loop() {
  //
  //StopLight();
  //InitializeMatrices();
-
+  //TurnRightNewShoulders();
   DrawWings();
   //drawPlasma2(frames++);
 
