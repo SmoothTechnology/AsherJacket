@@ -786,6 +786,40 @@ void TurnRightNewShoulders()
   }
 }
 
+void TurnLeftNewShoulders()
+{
+  int maxFrames = 20;
+  int startX = 11;
+  int startY = 6;
+  int endX = 18;
+  int endY = 12;
+
+  for(int i = 0; i < maxFrames; i++)
+  { 
+    int xDrawStart = startX - i;
+    int yDrawStart = startY - i;
+    int xDrawEnd = endX + i;
+    int YDrawEnd = endY + i;
+
+    if(xDrawStart < 0)
+      xDrawStart = 0;
+    if(yDrawStart < 0)
+      yDrawStart = 0;
+    if(xDrawEnd > xSizeLeftShoulder - 1)
+      xDrawEnd = xSizeLeftShoulder - 1;
+    if(YDrawEnd > ySizeLeftShoulder - 1)
+      YDrawEnd = ySizeLeftShoulder - 1;
+
+    LeftShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, 0x00FF00);
+    LeftShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, 0x00FF00);
+    drawPlasma2(masterFrame++);
+
+    DrawAllMatrices();
+
+    LeftShoulderCanvas.ClearMatrix();
+  }
+}
+
 void DrawWings()
 {
   //for(int i = 0; i < 13; i++)
@@ -1040,8 +1074,16 @@ void loop() {
  //StopLight();
  //InitializeMatrices();
   
-
-  TurnRightNewShoulders();
+  for(int i = 0; i < 5; i++)
+  {
+    TurnRightNewShoulders();
+  }
+  
+  for(int i = 0; i < 5; i++)
+  {
+    TurnLeftNewShoulders();
+  }
+  
   //DrawWings();
   //drawPlasma2(frames++);
 
