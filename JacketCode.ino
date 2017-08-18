@@ -948,6 +948,62 @@ void LightUpAllCanvases()
   DrawAllMatrices();
 }
 
+void StopLightNewShoulders()
+{
+
+  for(int i = 0; i < 10; i++)
+  {
+    int glowLevel = map(i, 0, 10, 0, 0x11);
+
+    int colorValue = glowLevel << 16;
+    colorValue = colorValue & 0xFF0000;
+
+    LeftArmBackCanvas.Fill(5, 5, colorValue);      
+    LeftArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
+    LeftArmFrontPartOneCanvas.Fill(5, 5, colorValue);   
+    LeftBackCanvas.Fill(5, 5, colorValue);              
+    LeftChestCanvas.Fill(5, 5, colorValue);             
+    RightArmBackCanvas.Fill(5, 5, colorValue);          
+    RightArmFrontPartOneCanvas.Fill(5, 5, colorValue);  
+    RightArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
+    RightBackCanvas.Fill(5, 5, colorValue);             
+    RightChestCanvas.Fill(5, 5, colorValue);
+    LeftShoulderCanvas.Fill(5, 5, colorValue);
+    RightShoulderCanvas.Fill(5,5, colorValue);
+
+    DrawAllMatrices();
+
+    InitializeMatrices();
+  }
+
+  delay(2000);
+
+  for(int i = 0; i < 10; i++)
+  {
+    int glowLevel = map(i, 10, 0, 0, 0x11);
+
+    int colorValue = glowLevel << 16;
+    colorValue = colorValue & 0xFF0000;
+
+    LeftArmBackCanvas.Fill(5, 5, colorValue);      
+    LeftArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
+    LeftArmFrontPartOneCanvas.Fill(5, 5, colorValue);   
+    LeftBackCanvas.Fill(5, 5, colorValue);              
+    LeftChestCanvas.Fill(5, 5, colorValue);             
+    RightArmBackCanvas.Fill(5, 5, colorValue);          
+    RightArmFrontPartOneCanvas.Fill(5, 5, colorValue);  
+    RightArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
+    RightBackCanvas.Fill(5, 5, colorValue);             
+    RightChestCanvas.Fill(5, 5, colorValue);
+    LeftShoulderCanvas.Fill(5, 5, colorValue);
+    RightShoulderCanvas.Fill(5,5, colorValue);
+
+    DrawAllMatrices();
+
+    InitializeMatrices();
+  }
+}
+
 void StopLight()
 {
 
@@ -1084,6 +1140,14 @@ void loop() {
     TurnLeftNewShoulders();
   }
   
+  for(int i = 0; i < 5; i++)
+  {
+    DrawWings();
+  }
+
+  StopLightNewShoulders();
+
+
   //DrawWings();
   //drawPlasma2(frames++);
 
