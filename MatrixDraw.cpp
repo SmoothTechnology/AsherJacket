@@ -208,6 +208,17 @@ void MatrixDraw::MeanFilter(int kernel)
 	}
 }
 
+void MatrixDraw::DrawBezierCurve(int x1, int y1, int x2, int y2, int x3, int y3, int color)
+{
+	for(double t = 0; t < 1.0; t += 0.01)
+	{
+		int curX = (1-t)*(1-t)*x1 + 2*(1-t)*t*x2 + t*t*x3;
+		int curY = (1-t)*(1-t)*y1 + 2*(1-t)*t*y2 + t*t*y3;
+		SetPixelAt(curX, curY, color);
+	}
+	
+}
+
 void MatrixDraw::MeanFilterByColor(int kernel)
 {
 	if(kernel % 2 == 0)
