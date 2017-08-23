@@ -975,6 +975,123 @@ void DrawWings()
   }
 }
 
+
+void DrawWingsBezier()
+{
+  //for(int i = 0; i < 13; i++)
+  //{
+  //  RightBackCanvas.DrawLine(0,ySizeRightBack/2, xSizeRightBack-1, i, 0x00FF00);
+  //  //LeftBackCanvas.DrawLine(0, ySizeLeftBack/2, xSizeLeftBack-1, i, 0x00FF00);
+  //  DrawAllMatrices();
+  //  RightBackCanvas.ClearMatrix();
+  //  //LeftBackCanvas.ClearMatrix();
+  //  delay(100);
+  //  Serial.println("Drawing Wings 1");
+  //}
+
+  int armTrigger = 20;
+  
+  for(int i = 0; i < 20; i++)
+  {
+    for(int j = 0; j < 12; j++)
+    {
+      RightBackCanvas.DrawBezierCurve(xSizeRightBack/2, 0, xSizeLeftBack/2 + 2, ySizeLeftBack-4, i+j, ySizeRightBack-1, Wheel(j*3));
+      LeftBackCanvas.DrawBezierCurve(i+j  ,  0, xSizeLeftBack/2 + 2, ySizeLeftBack-4, xSizeLeftBack/2, ySizeLeftBack-1, Wheel(j*3));
+    }
+
+    int glowLevel = map(i, 0, 20, 0, 50);
+    RightChestCanvas.Fill(5, 5, glowLevel);
+    LeftChestCanvas.Fill(5, 5, glowLevel);
+    //RightArmFrontPartOneCanvas.Fill(5, 5, glowLevel);
+    //RightArmFrontPartTwoCanvas.Fill(5, 5, glowLevel);
+    //RightArmBackCanvas.Fill(5,5,glowLevel);
+    //LeftArmFrontPartOneCanvas.Fill(5,5, glowLevel);
+    //LeftArmFrontPartTwoCanvas.Fill(5,5,glowLevel);
+    //LeftArmBackCanvas.Fill(5,5,glowLevel);
+
+    //RightBackCanvas.Fill(30, 5, 0xFF0000);
+    LeftBackCanvas.MeanFilterByColor(3);
+    RightBackCanvas.MeanFilterByColor(3);
+    //RightBackCanvas.Fill(5,5, 0xAA00AA);
+    //RightBackCanvas.Fill(5, 5, 0xFF00FF);
+    
+    //LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, i, 0x00FF00);
+    DrawAllMatrices();
+    InitializeMatrices();
+    delay(20);
+//  
+  Serial.print(i);
+  Serial.print(" ");
+    Serial.println("Drawing Wings");
+  }
+
+  for(int i = 20; i > 0; i--)
+  {
+
+    for(int j = 0; j < 12; j++)
+    {
+      RightBackCanvas.DrawBezierCurve(xSizeRightBack/2, 0, xSizeLeftBack/2 + 2, ySizeLeftBack-4, i+j, ySizeRightBack-1, Wheel(j*3));
+      LeftBackCanvas.DrawBezierCurve(i+j  ,  0, xSizeLeftBack/2 + 2, ySizeLeftBack-4, xSizeLeftBack/2, ySizeLeftBack-1, Wheel(j*3));
+    }
+
+    int redLevel = map(i, 0, 20, 0, 0xFF);
+    int greenLevel = map(i, 0, 20, 0, 0xAA);
+    int color = redLevel << 16 | greenLevel << 8;
+    color = color & 0xFFFF00;
+
+    // Right Arms
+    int rightArmBackPos = map(i, armTrigger, 0, 5, xSizeRightArmBack-1);
+    RightArmBackCanvas.DrawRectangle(rightArmBackPos - 5, 0, rightArmBackPos, ySizeRightArmBack-1, color);
+    RightArmBackCanvas.Fill(rightArmBackPos-2, ySizeRightArmBack/2, color);
+
+    int rightArmFrontPartTwoPos = map(i, armTrigger, 0, 5, xSizeRightArmPartTwo-1);
+    RightArmFrontPartTwoCanvas.DrawRectangle(rightArmFrontPartTwoPos-5, 0, rightArmFrontPartTwoPos-1, ySizeRightArmPartTwo-1, color);
+    RightArmFrontPartTwoCanvas.Fill(rightArmFrontPartTwoPos-2, ySizeRightArmPartTwo/2, color);
+
+    int rightArmFrontPartOnePos = map(i, armTrigger, 0, 5, xSizeRightArmPartOne-1);
+    RightArmFrontPartOneCanvas.DrawRectangle(rightArmFrontPartOnePos-5, 0, rightArmFrontPartOnePos-1, ySizeRightArmPartOne-1, color);
+    RightArmFrontPartOneCanvas.Fill(rightArmFrontPartOnePos-2, ySizeRightArmPartOne/2, color);
+
+    // Left Arms
+    int leftArmBackPos = map(i, armTrigger, 0, 5, xSizeLeftArmBack-1);
+    LeftArmBackCanvas.DrawRectangle(leftArmBackPos - 5, 0, leftArmBackPos, ySizeLeftArmBack-1, color);
+    LeftArmBackCanvas.Fill(leftArmBackPos-2, ySizeLeftArmBack/2, color);
+
+    int leftArmFrontPartTwoPos = map(i, armTrigger, 0, 5, xSizeLeftArmPartTwo-1);
+    LeftArmFrontPartTwoCanvas.DrawRectangle(leftArmFrontPartTwoPos-5, 0, leftArmFrontPartTwoPos-1, ySizeLeftArmPartTwo-1, color);
+    LeftArmFrontPartTwoCanvas.Fill(leftArmFrontPartTwoPos-2, ySizeLeftArmPartTwo/2, color);
+
+    int leftArmFrontPartOnePos = map(i, armTrigger, 0, 5, xSizeLeftArmFrontPartOne-1);
+    LeftArmFrontPartOneCanvas.DrawRectangle(leftArmFrontPartOnePos-5, 0, leftArmFrontPartOnePos-1, ySizeLeftArmFrontPartOne-1, color);
+    LeftArmFrontPartOneCanvas.Fill(leftArmFrontPartOnePos-2, ySizeLeftArmFrontPartOne/2, color);
+
+
+    int glowLevel = map(i, 0, 20, 0, 50);
+    RightChestCanvas.Fill(5, 5, glowLevel);
+    LeftChestCanvas.Fill(5, 5, glowLevel);
+    //RightArmFrontPartOneCanvas.Fill(0, 0, glowLevel);
+    //RightArmFrontPartTwoCanvas.Fill(0, 0, glowLevel);
+    //RightArmBackCanvas.Fill(0,0,glowLevel);
+    //LeftArmFrontPartOneCanvas.Fill(0,0, glowLevel);
+    //LeftArmFrontPartTwoCanvas.Fill(0,0,glowLevel);
+    //LeftArmBackCanvas.Fill(0,0,glowLevel);
+
+    //RightBackCanvas.Fill(30, 5, 0xFF0000);
+    LeftBackCanvas.MeanFilterByColor(3);
+    RightBackCanvas.MeanFilterByColor(3);
+    //RightBackCanvas.Fill(5, 5, 0xFF00FF);
+    
+    //LeftBackCanvas.DrawLine(xSizeLeftBack/2, 0, i, i, 0x00FF00);
+    DrawAllMatrices();
+    InitializeMatrices();
+    delay(20);
+//  
+  Serial.print(i);
+  Serial.print(" ");
+    Serial.println("Drawing Wings");
+  }
+}
+
 void LightUpAllCanvases()
 {
   LeftArmBackCanvas.Fill(5, 5, 0xAA0000);      
@@ -1173,22 +1290,22 @@ void loop() {
  //StopLight();
  //InitializeMatrices();
   
-  for(int i = 0; i < 5; i++)
-  {
-    TurnRightNewShoulders();
-  }
+  //for(int i = 0; i < 5; i++)
+  //{
+  //  TurnRightNewShoulders();
+  //}
+  //
+  //for(int i = 0; i < 5; i++)
+  //{
+  //  TurnLeftNewShoulders();
+  //}
   
   for(int i = 0; i < 5; i++)
   {
-    TurnLeftNewShoulders();
-  }
-  
-  for(int i = 0; i < 5; i++)
-  {
-    DrawWings();
+    DrawWingsBezier();
   }
 
-  StopLightNewShoulders();
+  //StopLightNewShoulders();
 
 
   //DrawWings();

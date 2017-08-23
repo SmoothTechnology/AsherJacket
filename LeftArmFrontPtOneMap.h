@@ -505,6 +505,10 @@ LeftArmPartOneMap[5].x = 26;
 LeftArmPartOneMap[5].y = 13;
 LeftArmPartOneMap[2].x = 27;
 LeftArmPartOneMap[2].y = 13;
+LeftArmPartOneMap[0].x = 27;
+LeftArmPartOneMap[0].y = 13;
+LeftArmPartOneMap[1].x = 27;
+LeftArmPartOneMap[1].y = 13;
 LeftArmPartOneMap[3].x = 27;
 LeftArmPartOneMap[3].y = 13;
 }

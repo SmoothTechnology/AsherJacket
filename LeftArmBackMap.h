@@ -16,6 +16,8 @@ LeftArmBackMap[403].x = 29;
 LeftArmBackMap[403].y = 0;
 LeftArmBackMap[404].x = 29;
 LeftArmBackMap[404].y = 0;
+LeftArmBackMap[405].x = 29;
+LeftArmBackMap[405].y = 0;
 LeftArmBackMap[518].x = 21;
 LeftArmBackMap[518].y = 1;
 LeftArmBackMap[407].x = 24;
@@ -1178,5 +1180,9 @@ LeftArmBackMap[193].x = 6;
 LeftArmBackMap[193].y = 14;
 LeftArmBackMap[5].x = 33;
 LeftArmBackMap[5].y = 15;
+LeftArmBackMap[4].x = 33;
+LeftArmBackMap[4].y = 15;
+LeftArmBackMap[3].x = 33;
+LeftArmBackMap[3].y = 15;
 }
 

@@ -9,6 +9,8 @@ void InitializeRightArmPartTwoMap()
 {
 	RightArmPartTwoMap[48].x = 21;
 RightArmPartTwoMap[48].y = 0;
+	RightArmPartTwoMap[49].x = 21;
+RightArmPartTwoMap[49].y = 0;
 RightArmPartTwoMap[52].x = 22;
 RightArmPartTwoMap[52].y = 0;
 RightArmPartTwoMap[53].x = 22;
@@ -143,6 +145,8 @@ RightArmPartTwoMap[318].x = 30;
 RightArmPartTwoMap[318].y = 2;
 RightArmPartTwoMap[319].x = 31;
 RightArmPartTwoMap[319].y = 2;
+RightArmPartTwoMap[320].x = 31;
+RightArmPartTwoMap[320].y = 2;
 RightArmPartTwoMap[321].x = 31;
 RightArmPartTwoMap[321].y = 2;
 RightArmPartTwoMap[27].x = 11;
