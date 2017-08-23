@@ -1136,7 +1136,7 @@ void StopLightNewShoulders()
     InitializeMatrices();
   }
 
-  delay(2000);
+  delay(4000);
 
   for(int i = 0; i < 10; i++)
   {
@@ -1290,22 +1290,22 @@ void loop() {
  //StopLight();
  //InitializeMatrices();
   
-  //for(int i = 0; i < 5; i++)
-  //{
-  //  TurnRightNewShoulders();
-  //}
-  //
-  //for(int i = 0; i < 5; i++)
-  //{
-  //  TurnLeftNewShoulders();
-  //}
+  for(int i = 0; i < 10; i++)
+  {
+    TurnRightNewShoulders();
+  }
   
-  for(int i = 0; i < 5; i++)
+  for(int i = 0; i < 10; i++)
+  {
+    TurnLeftNewShoulders();
+  }
+  
+  for(int i = 0; i < 10; i++)
   {
     DrawWingsBezier();
   }
 
-  //StopLightNewShoulders();
+  StopLightNewShoulders();
 
 
   //DrawWings();
