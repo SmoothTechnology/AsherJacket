@@ -532,9 +532,10 @@ void DrawRightShoulderMatrix()
       leds.setPixel(i, value);
     }
 
-    for(int i = minLEDRightShoulder; i < 34; i++)
+    for(int i = minLEDRightShoulder; i < minLEDRightShoulder + 34; i++)
     {
-      leds.setPixel(i, 0);
+      uint32_t color = 0x000000;
+      leds.setPixel(i, color);
     }
   }
   else
@@ -560,9 +561,10 @@ void DrawLeftShoulderMatrix()
       leds.setPixel(i, value);
     }
 
-    for(int i = minLEDLeftShoulder; i < 37; i++)
+    for(int i = minLEDLeftShoulder; i < minLEDLeftShoulder+ 37; i++)
     {
-      leds.setPixel(i, 0);
+      uint32_t color = 0x000000;
+      leds.setPixel(i, color);
     }
   }
   else
@@ -1147,7 +1149,7 @@ void DrawWingsShoulders()
 
   Serial.println("BEGIN WINGS");
   
-  for(int i = 5; i < 15; i++)
+  for(int i = 5; i < 20; i++)
   {
     for(int j = 0; j < 5; j++)
     {
@@ -1161,23 +1163,23 @@ void DrawWingsShoulders()
 
     int loopVal = 0;
 
-    if(i < 3)
-      loopVal = 3;
-    else if (i < 10)
+    if(i < 10)
+      loopVal = 1;
+    else if (i < 15)
       loopVal = 2;
     else
-      loopVal = 1;
+      loopVal = 3;
 
     for(int k = 0; k < loopVal; k++)
     {
       plasmaState = 0;
-      //drawPlasma2(masterFrame+=random(4,14));
+      drawPlasma2(masterFrame+=random(4,14));
     
       DrawAllMatrices();
     }
 
     InitializeMatrices();
-    delay(20);
+    //delay(20);
 
   Serial.print(millis() - lastMillis);
   lastMillis = millis();
@@ -1188,7 +1190,7 @@ void DrawWingsShoulders()
 
   }
 
-  for(int i = 15; i > 5; i--)
+  for(int i = 20; i > 5; i--)
   {
 
     for(int j = 0; j < 5; j++)
@@ -1202,23 +1204,23 @@ void DrawWingsShoulders()
 
     int loopVal = 0;
 
-    if(i < 3)
-      loopVal = 3;
-    else if (i < 10)
+    if(i < 10)
+      loopVal = 1;
+    else if (i < 15)
       loopVal = 2;
     else
-      loopVal = 1;
+      loopVal = 3;
 
     for(int k = 0; k < loopVal; k++)
     {
       plasmaState = 0;
-      //drawPlasma2(masterFrame+=random(4,14));
+      drawPlasma2(masterFrame+=random(4,14));
     
       DrawAllMatrices();
     }
     
     InitializeMatrices();
-    delay(20);
+    //delay(20);
 
     Serial.print(millis() - lastMillis);
     Serial.print(" ");
@@ -1402,19 +1404,19 @@ void loop() {
 
 
   
-  //InitializeMatrices();
-  //for(int i = 0; i < 20; i++)
-  //{
-  //  TurnRightNewShoulders();
-  //}
-  //
-  //InitializeMatrices();
-  //for(int i = 0; i < 20; i++)
-  //{
-  //  TurnLeftNewShoulders();
-  //}
-  //
-  //StopLightNewShoulders();  
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnRightNewShoulders();
+  }
+  
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnLeftNewShoulders();
+  }
+  
+  StopLightNewShoulders();  
 
   InitializeMatrices();
   for(int i = 0; i < 5; i++)
