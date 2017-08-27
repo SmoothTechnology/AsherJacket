@@ -2,10 +2,10 @@ import math
 
 valueList = []
 
-for x in range(0, 60) :
+for x in range(0, 38) :
 	valueList.append(0)
 
-sineWidth = 136
+sineWidth = 180
 for x in range(0, sineWidth) :
 	
 	value = float(x)/ float(sineWidth)
@@ -14,7 +14,7 @@ for x in range(0, sineWidth) :
 	print sinArg
 	valueList.append(int(math.sin(sinArg)*150))
 
-for x in range(0, 60) :
+for x in range(0, 38) :
 	valueList.append(0)
 
 print valueList

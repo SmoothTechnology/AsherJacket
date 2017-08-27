@@ -260,7 +260,7 @@ uint8_t const cos_wave_Fast[256] PROGMEM =
 };
 
 uint8_t const cos_wave[256] PROGMEM = {
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,6,10,13,17,20,24,27,30,34,37,41,44,47,50,54,57,60,63,66,69,72,75,78,81,84,87,90,93,95,98,101,103,106,108,110,113,115,117,119,121,123,125,127,129,131,132,134,135,137,138,139,141,142,143,144,145,146,146,147,148,148,149,149,149,149,149,150,149,149,149,149,149,148,148,147,146,146,145,144,143,142,141,139,138,137,135,134,132,131,129,127,125,123,121,119,117,115,113,110,108,106,103,101,98,95,93,90,87,84,81,78,75,72,69,66,63,60,57,54,50,47,44,41,37,34,30,27,24,20,17,13,10,6,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,5,7,10,13,15,18,20,23,26,28,31,33,36,38,41,43,46,48,51,53,56,58,61,63,65,68,70,72,74,77,79,81,83,86,88,90,92,94,96,98,100,102,104,106,107,109,111,113,114,116,118,119,121,122,124,125,127,128,129,131,132,133,134,135,137,138,139,140,140,141,142,143,144,144,145,146,146,147,147,148,148,148,149,149,149,149,149,149,150,149,149,149,149,149,149,148,148,148,147,147,146,146,145,144,144,143,142,141,140,140,139,138,137,135,134,133,132,131,129,128,127,125,124,122,121,119,118,116,114,113,111,109,107,106,104,102,100,98,96,94,92,90,88,86,83,81,79,77,74,72,70,68,65,63,61,58,56,53,51,48,46,43,41,38,36,33,31,28,26,23,20,18,15,13,10,7,5,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 inline uint8_t fastCosineCalcMovement( uint16_t preWrapVal)
 {
@@ -296,8 +296,16 @@ void drawPlasma2(int frameCount) {
          //r = r*0.01;
          //r = r*100;
 
-         r = r*0.25;
-         int value = r << 16 | r << 8 | r;
+         // Purple
+         uint8_t blue = r;
+         r = r*0.4;
+
+         // Red
+
+         int value = r << 16 | r << 8 | blue;
+         value = value & 0xFF00FF;
+
+        //value = r << 16 | g << 8 | b;
 
         if(x < xSizeRightChest && y < ySizeRightChest)
         {
@@ -810,7 +818,7 @@ void TurnRightNewShoulders()
     color = color & 0x00FF00;
     RightShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, color);
     RightShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
-    drawPlasma2(masterFrame++);
+    drawPlasma2(masterFrame+=random(4,14));
 
     DrawAllMatrices();
 
@@ -850,7 +858,7 @@ void TurnLeftNewShoulders()
 
     LeftShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, color);
     LeftShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
-    drawPlasma2(masterFrame++);
+    drawPlasma2(masterFrame+=random(4,14));
 
     DrawAllMatrices();
 
@@ -989,6 +997,7 @@ void DrawWingsBezier()
   //  Serial.println("Drawing Wings 1");
   //}
 
+  unsigned long lastMillis = millis();
   int armTrigger = 20;
   
   for(int i = 0; i < 20; i++)
@@ -1020,9 +1029,13 @@ void DrawWingsBezier()
     InitializeMatrices();
     delay(20);
 //  
+  Serial.print(millis() - lastMillis);
+  lastMillis = millis();
+  Serial.print(" ");
   Serial.print(i);
   Serial.print(" ");
     Serial.println("Drawing Wings");
+
   }
 
   for(int i = 20; i > 0; i--)
@@ -1085,9 +1098,12 @@ void DrawWingsBezier()
     DrawAllMatrices();
     InitializeMatrices();
     delay(20);
-//  
-  Serial.print(i);
-  Serial.print(" ");
+
+    Serial.print(millis() - lastMillis);
+    Serial.print(" ");
+    lastMillis = millis();
+    Serial.print(i);
+    Serial.print(" ");
     Serial.println("Drawing Wings");
   }
 }
@@ -1221,44 +1237,6 @@ void StopLight()
 
 
 void loop() {
-  //int microsec = 0;  // change them all in 2 seconds
-//
-  //// uncomment for voltage controlled speed
-  //// millisec = analogRead(A9) / 40;
-  ////colorWipe(GREEN, microsec);
-//
-//
-//
-  //if(Serial.available() > 2)
-  //{
-  //    for(int i = 0; i < leds.numPixels(); i++)
-  //    {
-  //        leds.setPixel(i, 0x000000);
-  //    }
-//
-  //    int led2Light = Serial.parseInt();
-  //    Serial.println("In Here");
-  //    Serial.println(led2Light);
-//
-  //    leds.setPixel(led2Light, GREEN);
-  //    leds.show();
-  //}
-//
-  //delay(5); 
-
-  //for(int i = 0; i < 22; i++)
-  //{
-  //  RightArmFrontPartOneCanvas.DrawRectangle(i, 0, i+10, 10, 0x990000);
-  //  RightArmFrontPartOneCanvas.Fill(i+4, 5, 0x009900);
-  //  RightArmFrontPartTwoCanvas.DrawRectangle(i, 0, i+10, 10, 0x990000);
-  //  RightArmFrontPartTwoCanvas.Fill(i+4, 5, 0x009900);
-  //  DrawAllMatrices();
-  //  RightArmFrontPartOneCanvas.ClearMatrix();
-  //  RightArmFrontPartTwoCanvas.ClearMatrix();
-  //  Serial.println("Good to go");
-  //  delay(100);
-  //}
-
   //DrawWings();
   
   //LightUpAllCanvases();
@@ -1300,12 +1278,12 @@ void loop() {
     TurnLeftNewShoulders();
   }
   
-  for(int i = 0; i < 10; i++)
-  {
-    DrawWingsBezier();
-  }
-
-  StopLightNewShoulders();
+  //for(int i = 0; i < 10; i++)
+  //{
+  //  DrawWingsBezier();
+  //}
+//
+  //StopLightNewShoulders();
 
 
   //DrawWings();
