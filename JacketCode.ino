@@ -1108,6 +1108,60 @@ void DrawWingsBezier()
   }
 }
 
+
+void DrawWingsShoulders()
+{
+  unsigned long lastMillis = millis();
+  int armTrigger = 20;
+  
+  for(int i = 0; i < 20; i++)
+  {
+    for(int j = 0; j < 12; j++)
+    {
+      LeftShoulderCanvas.DrawBezierCurve(24, 20, 18, 20 + j - i, 14, 16 + j - i, Wheel(j*3));
+      RightShoulderCanvas.DrawBezierCurve(23, 3, 20, 4 - j + i, 14, 8 - j + i, Wheel(j*3));
+
+    }
+
+    drawPlasma2(masterFrame+=random(4,14));
+
+    DrawAllMatrices();
+    InitializeMatrices();
+    delay(20);
+
+  Serial.print(millis() - lastMillis);
+  lastMillis = millis();
+  Serial.print(" ");
+  Serial.print(i);
+  Serial.print(" ");
+    Serial.println("Drawing Wings");
+
+  }
+
+  for(int i = 20; i > 0; i--)
+  {
+
+    for(int j = 0; j < 12; j++)
+    {
+      LeftShoulderCanvas.DrawBezierCurve(24, 20, 18, 20 + j - i, 14, 16 + j - i, Wheel(j*3));
+      RightShoulderCanvas.DrawBezierCurve(23, 3, 20, 4 - j + i, 14, 8 - j + i, Wheel(j*3));
+    }
+
+    drawPlasma2(masterFrame+=random(4,14));
+    
+    DrawAllMatrices();
+    InitializeMatrices();
+    delay(20);
+
+    Serial.print(millis() - lastMillis);
+    Serial.print(" ");
+    lastMillis = millis();
+    Serial.print(i);
+    Serial.print(" ");
+    Serial.println("Drawing Wings");
+  }
+}
+
 void LightUpAllCanvases()
 {
   LeftArmBackCanvas.Fill(5, 5, 0xAA0000);      
