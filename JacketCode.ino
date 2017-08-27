@@ -55,6 +55,10 @@
 
 int turnSignals = 0;
 
+int plasmaState = 0;
+// 0 - Normal
+// 1 - Stop
+
 const int ledsPerStrip = 1280;
 
 DMAMEM int displayMemory[ledsPerStrip*8];
@@ -296,14 +300,25 @@ void drawPlasma2(int frameCount) {
          //r = r*0.01;
          //r = r*100;
 
+         int value = 0;
+
          // Purple
-         uint8_t blue = r;
-         r = r*0.4;
+         if(plasmaState == 0)
+         {
+            uint8_t blue = r;
+            r = r*0.4;
+            value = r << 16 | r << 8 | blue;
+            value = value & 0xFF00FF;
+         }
+         
 
          // Red
-
-         int value = r << 16 | r << 8 | blue;
-         value = value & 0xFF00FF;
+         if(plasmaState == 1)
+         {
+            r = r*0.4;
+            value = r << 16 | r << 8 | r;
+            value = value & 0xFF0000;
+         }
 
         //value = r << 16 | g << 8 | b;
 
@@ -791,7 +806,7 @@ void TurnRight()
 void TurnRightNewShoulders()
 {
   turnSignals = 1;
-  int maxFrames = 20;
+  int maxFrames = 10;
   int startX = 15;
   int startY = 13;
   int endX = 16;
@@ -818,6 +833,8 @@ void TurnRightNewShoulders()
     color = color & 0x00FF00;
     RightShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, color);
     RightShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
+
+    plasmaState = 0;
     drawPlasma2(masterFrame+=random(4,14));
 
     DrawAllMatrices();
@@ -830,7 +847,7 @@ void TurnRightNewShoulders()
 void TurnLeftNewShoulders()
 {
   turnSignals = 1;
-  int maxFrames = 20;
+  int maxFrames = 10;
   int startX = 15;
   int startY = 6;
   int endX = 16;
@@ -858,6 +875,8 @@ void TurnLeftNewShoulders()
 
     LeftShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, color);
     LeftShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
+
+    plasmaState = 0;
     drawPlasma2(masterFrame+=random(4,14));
 
     DrawAllMatrices();
@@ -1123,6 +1142,7 @@ void DrawWingsShoulders()
 
     }
 
+    plasmaState = 0;
     drawPlasma2(masterFrame+=random(4,14));
 
     DrawAllMatrices();
@@ -1147,6 +1167,7 @@ void DrawWingsShoulders()
       RightShoulderCanvas.DrawBezierCurve(23, 3, 20, 4 - j + i, 14, 8 - j + i, Wheel(j*3));
     }
 
+    plasmaState = 0;
     drawPlasma2(masterFrame+=random(4,14));
     
     DrawAllMatrices();
@@ -1183,50 +1204,53 @@ void StopLightNewShoulders()
 
   for(int i = 0; i < 10; i++)
   {
-    int glowLevel = map(i, 0, 10, 0, 0x11);
+    int glowLevel = map(i, 0, 10, 0, 0xFF);
 
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
 
-    LeftArmBackCanvas.Fill(5, 5, colorValue);      
-    LeftArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
-    LeftArmFrontPartOneCanvas.Fill(5, 5, colorValue);   
-    LeftBackCanvas.Fill(5, 5, colorValue);              
-    LeftChestCanvas.Fill(5, 5, colorValue);             
-    RightArmBackCanvas.Fill(5, 5, colorValue);          
-    RightArmFrontPartOneCanvas.Fill(5, 5, colorValue);  
-    RightArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
-    RightBackCanvas.Fill(5, 5, colorValue);             
-    RightChestCanvas.Fill(5, 5, colorValue);
     LeftShoulderCanvas.Fill(5, 5, colorValue);
     RightShoulderCanvas.Fill(5,5, colorValue);
+
+    plasmaState = 1;
+    drawPlasma2(masterFrame+=random(4,14));
+
 
     DrawAllMatrices();
 
     InitializeMatrices();
   }
 
-  delay(4000);
+  unsigned long startTime = millis();
+
+  while(millis() - startTime < 4000)
+  {
+    int colorValue = 0xFF << 16;
+    colorValue = colorValue & 0xFF0000;
+
+    LeftShoulderCanvas.Fill(5, 5, colorValue);
+    RightShoulderCanvas.Fill(5,5, colorValue);
+
+    plasmaState = 1;
+    drawPlasma2(masterFrame+=random(4,14));
+
+    DrawAllMatrices();
+
+    InitializeMatrices();
+  }
 
   for(int i = 0; i < 10; i++)
   {
-    int glowLevel = map(i, 10, 0, 0, 0x11);
+    int glowLevel = map(i, 10, 0, 0, 0xFF);
 
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
 
-    LeftArmBackCanvas.Fill(5, 5, colorValue);      
-    LeftArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
-    LeftArmFrontPartOneCanvas.Fill(5, 5, colorValue);   
-    LeftBackCanvas.Fill(5, 5, colorValue);              
-    LeftChestCanvas.Fill(5, 5, colorValue);             
-    RightArmBackCanvas.Fill(5, 5, colorValue);          
-    RightArmFrontPartOneCanvas.Fill(5, 5, colorValue);  
-    RightArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
-    RightBackCanvas.Fill(5, 5, colorValue);             
-    RightChestCanvas.Fill(5, 5, colorValue);
     LeftShoulderCanvas.Fill(5, 5, colorValue);
     RightShoulderCanvas.Fill(5,5, colorValue);
+
+    plasmaState = 1;
+    drawPlasma2(masterFrame+=random(4,14));
 
     DrawAllMatrices();
 
@@ -1322,15 +1346,19 @@ void loop() {
  //StopLight();
  //InitializeMatrices();
   
-  for(int i = 0; i < 10; i++)
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
   {
     TurnRightNewShoulders();
   }
   
-  for(int i = 0; i < 10; i++)
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
   {
     TurnLeftNewShoulders();
   }
+  
+  StopLightNewShoulders();  
   
   //for(int i = 0; i < 10; i++)
   //{
