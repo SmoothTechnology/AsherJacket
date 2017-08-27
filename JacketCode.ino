@@ -531,6 +531,11 @@ void DrawRightShoulderMatrix()
       int value = RightShoulderCanvas.GetValueAt(curPos.x, curPos.y);
       leds.setPixel(i, value);
     }
+
+    for(int i = minLEDRightShoulder; i < 34; i++)
+    {
+      leds.setPixel(i, 0);
+    }
   }
   else
   {
@@ -553,6 +558,11 @@ void DrawLeftShoulderMatrix()
       LEDPos curPos = LeftShoulderMap[i - minLEDLeftShoulder];
       int value = LeftShoulderCanvas.GetValueAt(curPos.x, curPos.y);
       leds.setPixel(i, value);
+    }
+
+    for(int i = minLEDLeftShoulder; i < 37; i++)
+    {
+      leds.setPixel(i, 0);
     }
   }
   else
@@ -814,10 +824,10 @@ void TurnRightNewShoulders()
 
   for(int i = 0; i < maxFrames; i++)
   { 
-    int xDrawStart = startX - i;
-    int yDrawStart = startY - i;
-    int xDrawEnd = endX + i;
-    int YDrawEnd = endY + i;
+    int xDrawStart = startX - i*2;
+    int yDrawStart = startY - i*2;
+    int xDrawEnd = endX + i*2;
+    int YDrawEnd = endY + i*2;
 
     if(xDrawStart < 0)
       xDrawStart = 0;
@@ -829,8 +839,9 @@ void TurnRightNewShoulders()
       YDrawEnd = ySizeRightShoulder - 1;
 
     int greenLevel = map(i, maxFrames, 0, 0, 255);
-    int color = greenLevel << 8;
-    color = color & 0x00FF00;
+    int color = greenLevel << 16 | greenLevel;
+    color = color & 0xFF00FF;
+
     RightShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, color);
     RightShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
 
@@ -855,10 +866,10 @@ void TurnLeftNewShoulders()
 
   for(int i = 0; i < maxFrames; i++)
   { 
-    int xDrawStart = startX - i;
-    int yDrawStart = startY - i;
-    int xDrawEnd = endX + i;
-    int YDrawEnd = endY + i;
+    int xDrawStart = startX - i*2;
+    int yDrawStart = startY - i*2;
+    int xDrawEnd = endX + i*2;
+    int YDrawEnd = endY + i*2;
 
     if(xDrawStart < 0)
       xDrawStart = 0;
@@ -870,8 +881,8 @@ void TurnLeftNewShoulders()
       YDrawEnd = ySizeLeftShoulder - 1;
 
     int greenLevel = map(i, maxFrames, 0, 0, 255);
-    int color = greenLevel << 8;
-    color = color & 0x00FF00;
+    int color = greenLevel << 16 | greenLevel;
+    color = color & 0xFF00FF;
 
     LeftShoulderCanvas.DrawRectangle(xDrawStart, yDrawStart, xDrawEnd, YDrawEnd, color);
     LeftShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
@@ -1132,20 +1143,39 @@ void DrawWingsShoulders()
 {
   unsigned long lastMillis = millis();
   int armTrigger = 20;
+  turnSignals = 1;
+
+  Serial.println("BEGIN WINGS");
   
-  for(int i = 0; i < 20; i++)
+  for(int i = 5; i < 15; i++)
   {
-    for(int j = 0; j < 12; j++)
+    for(int j = 0; j < 5; j++)
     {
-      LeftShoulderCanvas.DrawBezierCurve(24, 20, 18, 20 + j - i, 14, 16 + j - i, Wheel(j*3));
-      RightShoulderCanvas.DrawBezierCurve(23, 3, 20, 4 - j + i, 14, 8 - j + i, Wheel(j*3));
+      //LeftShoulderCanvas.DrawRectangle(j+i, 0, j+1+i, 10, Wheel(j*6));
+      //RightShoulderCanvas.DrawRectangle(j+i, 13, j+1+i, 20, Wheel(j*6));
+
+      LeftShoulderCanvas.DrawCircle(j+i-5, 15, 9, Wheel(j*6));
+      RightShoulderCanvas.DrawCircle(j+i-5, 15, 13, Wheel(j*6));
 
     }
 
-    plasmaState = 0;
-    drawPlasma2(masterFrame+=random(4,14));
+    int loopVal = 0;
 
-    DrawAllMatrices();
+    if(i < 3)
+      loopVal = 3;
+    else if (i < 10)
+      loopVal = 2;
+    else
+      loopVal = 1;
+
+    for(int k = 0; k < loopVal; k++)
+    {
+      plasmaState = 0;
+      //drawPlasma2(masterFrame+=random(4,14));
+    
+      DrawAllMatrices();
+    }
+
     InitializeMatrices();
     delay(20);
 
@@ -1158,19 +1188,35 @@ void DrawWingsShoulders()
 
   }
 
-  for(int i = 20; i > 0; i--)
+  for(int i = 15; i > 5; i--)
   {
 
-    for(int j = 0; j < 12; j++)
+    for(int j = 0; j < 5; j++)
     {
-      LeftShoulderCanvas.DrawBezierCurve(24, 20, 18, 20 + j - i, 14, 16 + j - i, Wheel(j*3));
-      RightShoulderCanvas.DrawBezierCurve(23, 3, 20, 4 - j + i, 14, 8 - j + i, Wheel(j*3));
+      //LeftShoulderCanvas.DrawRectangle(j+i, 0, j+1+i, 10, Wheel(j*6));
+      //RightShoulderCanvas.DrawRectangle(j+i, 15, j+1+i, 20, Wheel(j*6));
+
+      LeftShoulderCanvas.DrawCircle(j+i-5, 15, 9, Wheel(j*6));
+      RightShoulderCanvas.DrawCircle(j+i-5, 15, 13, Wheel(j*6));
     }
 
-    plasmaState = 0;
-    drawPlasma2(masterFrame+=random(4,14));
+    int loopVal = 0;
+
+    if(i < 3)
+      loopVal = 3;
+    else if (i < 10)
+      loopVal = 2;
+    else
+      loopVal = 1;
+
+    for(int k = 0; k < loopVal; k++)
+    {
+      plasmaState = 0;
+      //drawPlasma2(masterFrame+=random(4,14));
     
-    DrawAllMatrices();
+      DrawAllMatrices();
+    }
+    
     InitializeMatrices();
     delay(20);
 
@@ -1181,6 +1227,8 @@ void DrawWingsShoulders()
     Serial.print(" ");
     Serial.println("Drawing Wings");
   }
+
+  turnSignals = 0;
 }
 
 void LightUpAllCanvases()
@@ -1345,21 +1393,41 @@ void loop() {
  //
  //StopLight();
  //InitializeMatrices();
+
+
+
+
+
+
+
+
   
+  //InitializeMatrices();
+  //for(int i = 0; i < 20; i++)
+  //{
+  //  TurnRightNewShoulders();
+  //}
+  //
+  //InitializeMatrices();
+  //for(int i = 0; i < 20; i++)
+  //{
+  //  TurnLeftNewShoulders();
+  //}
+  //
+  //StopLightNewShoulders();  
+
   InitializeMatrices();
-  for(int i = 0; i < 20; i++)
+  for(int i = 0; i < 5; i++)
   {
-    TurnRightNewShoulders();
+    DrawWingsShoulders();
   }
   
-  InitializeMatrices();
-  for(int i = 0; i < 20; i++)
-  {
-    TurnLeftNewShoulders();
-  }
   
-  StopLightNewShoulders();  
-  
+
+
+
+
+
   //for(int i = 0; i < 10; i++)
   //{
   //  DrawWingsBezier();

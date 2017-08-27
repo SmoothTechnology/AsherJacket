@@ -219,6 +219,15 @@ void MatrixDraw::DrawBezierCurve(int x1, int y1, int x2, int y2, int x3, int y3,
 	
 }
 
+void MatrixDraw::SetPixelAt(int x, int y, int value) 
+{
+	if(x >= 0 && x < GetMatrixXSize() && y >= 0 && y < GetMatrixYSize())
+	{
+		Canvas[x][y] = value; 
+	}
+	
+}
+
 void MatrixDraw::MeanFilterByColor(int kernel)
 {
 	if(kernel % 2 == 0)
