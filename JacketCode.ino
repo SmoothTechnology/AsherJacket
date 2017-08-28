@@ -71,15 +71,15 @@ OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 MatrixDraw LeftArmBackCanvas            (xSizeLeftArmBack, ySizeLeftArmBack);
 MatrixDraw LeftArmFrontPartTwoCanvas    (xSizeLeftArmPartTwo, ySizeLeftArmPartTwo);
 MatrixDraw LeftArmFrontPartOneCanvas    (xSizeLeftArmFrontPartOne, ySizeLeftArmFrontPartOne);
-MatrixDraw LeftBackCanvas               (xSizeLeftBack, ySizeLeftBack, 3);
-MatrixDraw LeftChestCanvas              (xSizeLeftChest, ySizeLeftChest, 3);
+MatrixDraw LeftBackCanvas               (xSizeLeftBack, ySizeLeftBack);
+MatrixDraw LeftChestCanvas              (xSizeLeftChest, ySizeLeftChest);
 MatrixDraw RightArmBackCanvas           (xSizeRightArmBack, ySizeRightArmBack);
 MatrixDraw RightArmFrontPartOneCanvas   (xSizeRightArmPartOne, ySizeRightArmPartOne);
 MatrixDraw RightArmFrontPartTwoCanvas   (xSizeRightArmPartTwo, ySizeRightArmPartTwo);
-MatrixDraw RightBackCanvas              (xSizeRightBack, ySizeRightBack, 3);
-MatrixDraw RightChestCanvas             (xSizeRightChest, ySizeRightChest, 3);
-MatrixDraw RightShoulderCanvas          (xSizeRightShoulder, ySizeRightShoulder);
-MatrixDraw LeftShoulderCanvas           (xSizeLeftShoulder, ySizeLeftShoulder);
+MatrixDraw RightBackCanvas              (xSizeRightBack, ySizeRightBack);
+MatrixDraw RightChestCanvas             (xSizeRightChest, ySizeRightChest);
+MatrixDraw RightShoulderCanvas          (xSizeRightShoulder, ySizeRightShoulder, 3);
+MatrixDraw LeftShoulderCanvas           (xSizeLeftShoulder, ySizeLeftShoulder, 3);
 
 int masterFrame = 0;
 
@@ -1140,6 +1140,21 @@ void DrawWingsBezier()
   }
 }
 
+void DrawWingFrame1()
+{
+
+}
+
+void DrawWingsFrames()
+{
+  for(int i = 0; i < 20; i++)
+  {
+    if(i == 1)
+    {
+      DrawWingFrame1();
+    }
+  }
+}
 
 void DrawWingsShoulders()
 {
@@ -1161,6 +1176,9 @@ void DrawWingsShoulders()
 
     }
 
+    LeftShoulderCanvas.MeanFilterByColor(3);
+    RightShoulderCanvas.MeanFilterByColor(3);
+
     int loopVal = 0;
 
     if(i < 10)
@@ -1173,7 +1191,7 @@ void DrawWingsShoulders()
     for(int k = 0; k < loopVal; k++)
     {
       plasmaState = 0;
-      drawPlasma2(masterFrame+=random(4,14));
+      //drawPlasma2(masterFrame+=random(4,14));
     
       DrawAllMatrices();
     }
@@ -1214,7 +1232,7 @@ void DrawWingsShoulders()
     for(int k = 0; k < loopVal; k++)
     {
       plasmaState = 0;
-      drawPlasma2(masterFrame+=random(4,14));
+      //drawPlasma2(masterFrame+=random(4,14));
     
       DrawAllMatrices();
     }
@@ -1404,19 +1422,19 @@ void loop() {
 
 
   
-  InitializeMatrices();
-  for(int i = 0; i < 20; i++)
-  {
-    TurnRightNewShoulders();
-  }
-  
-  InitializeMatrices();
-  for(int i = 0; i < 20; i++)
-  {
-    TurnLeftNewShoulders();
-  }
-  
-  StopLightNewShoulders();  
+  //InitializeMatrices();
+  //for(int i = 0; i < 20; i++)
+  //{
+  //  TurnRightNewShoulders();
+  //}
+  //
+  //InitializeMatrices();
+  //for(int i = 0; i < 20; i++)
+  //{
+  //  TurnLeftNewShoulders();
+  //}
+  //
+  //StopLightNewShoulders();  
 
   InitializeMatrices();
   for(int i = 0; i < 5; i++)
