@@ -1495,6 +1495,7 @@ void DrawWingsFrames()
 
     RightShoulderCanvas.MeanFilterByColor(3);
     LeftShoulderCanvas.MeanFilterByColor(3);
+    drawPlasma2(masterFrame+=random(4,14));
     DrawAllMatrices();
     InitializeMatrices();
 
