@@ -1145,6 +1145,9 @@ void DrawWingFrame1()
   uint32_t color = 0xFF0000;
   RightShoulderCanvas.DrawRectangle(21, 0, 23, 5, color);
   RightShoulderCanvas.Fill(22, 3, color);
+
+  LeftShoulderCanvas.DrawRectangle(0,4, 4,7, color);
+  LeftShoulderCanvas.Fill(2,5,color);
 }
 
 void DrawWingFrame2()
@@ -1154,6 +1157,11 @@ void DrawWingFrame2()
   RightShoulderCanvas.SetPixelAt(21,7, color);
   RightShoulderCanvas.DrawRectangle(0, 16, 8, 18, color);
   RightShoulderCanvas.Fill(4,17, color);
+
+  LeftShoulderCanvas.DrawRectangle(3,3, 5, 7, color);
+  LeftShoulderCanvas.Fill(4,4, color);
+  LeftShoulderCanvas.DrawRectangle(18,18, 22,24, color);
+  LeftShoulderCanvas.Fill(19, 20, color);
 }
 
 void DrawWingFrame3()
@@ -1163,6 +1171,14 @@ void DrawWingFrame3()
   RightShoulderCanvas.SetPixelAt(21,7, color);
 
   RightShoulderCanvas.DrawLine(7, 17, 9,17, color);
+
+
+  LeftShoulderCanvas.SetPixelAt(6,6, color);
+  LeftShoulderCanvas.SetPixelAt(7,6, color);
+  LeftShoulderCanvas.SetPixelAt(8,6, color);
+  LeftShoulderCanvas.DrawRectangle(18, 16, 21, 19, color);
+  LeftShoulderCanvas.Fill(19, 17, color);
+
 }
 
 void DrawWingFrame4()
@@ -1173,6 +1189,13 @@ void DrawWingFrame4()
   RightShoulderCanvas.SetPixelAt(10,16, color);
   RightShoulderCanvas.SetPixelAt(19,8, color);
   RightShoulderCanvas.SetPixelAt(20, 8, color);
+
+  LeftShoulderCanvas.SetPixelAt(8,6, color);
+  LeftShoulderCanvas.SetPixelAt(8,7, color);
+  LeftShoulderCanvas.SetPixelAt(9,6, color);
+  LeftShoulderCanvas.SetPixelAt(9,7, color);
+  LeftShoulderCanvas.SetPixelAt(19,15, color);
+  LeftShoulderCanvas.SetPixelAt(19,16, color);
 }
 
 void DrawWingFrame5()
@@ -1182,6 +1205,10 @@ void DrawWingFrame5()
   RightShoulderCanvas.DrawRectangle(9, 15, 12, 17, color);
   RightShoulderCanvas.Fill(20,9,color);
   RightShoulderCanvas.Fill(10, 16, color);
+
+  LeftShoulderCanvas.DrawRectangle(8,6, 10, 8, color);
+  LeftShoulderCanvas.Fill(9,7, color);
+  LeftShoulderCanvas.DrawRectangle(17,13, 18,15, color);
 }
 
 void DrawWingFrame6()
@@ -1192,6 +1219,12 @@ void DrawWingFrame6()
 
   RightShoulderCanvas.DrawRectangle(9, 15, 12, 17, color);
   RightShoulderCanvas.Fill(11, 16, color);
+
+
+  LeftShoulderCanvas.DrawRectangle(11,6, 13,14, color);
+  LeftShoulderCanvas.Fill(12,7, color);
+  LeftShoulderCanvas.DrawRectangle(10, 6, 12,12, color);
+  LeftShoulderCanvas.Fill(11, 7, color);
 }
 
 void DrawWingFrame7()
@@ -1202,6 +1235,13 @@ void DrawWingFrame7()
 
   RightShoulderCanvas.DrawRectangle(12, 12, 15, 17, color);
   RightShoulderCanvas.Fill(13, 14, color);
+
+
+
+  LeftShoulderCanvas.DrawRectangle(13,6, 15, 12, color);
+  LeftShoulderCanvas.Fill(14,7, color);
+  LeftShoulderCanvas.DrawRectangle(13, 10, 17, 12, color);
+  LeftShoulderCanvas.Fill(14, 11, color);
 }
 
 void DrawWingFrame8()
@@ -1210,6 +1250,8 @@ void DrawWingFrame8()
   RightShoulderCanvas.DrawRectangle(16, 14, 20, 16, color);
   RightShoulderCanvas.Fill(17, 15, color);
 
+  LeftShoulderCanvas.DrawRectangle(16,6, 20, 8, color);
+  LeftShoulderCanvas.Fill(17,7, color);
 }
 
 void DrawWingFrame9()
@@ -1217,6 +1259,7 @@ void DrawWingFrame9()
   uint32_t color = 0xFF0000;
   RightShoulderCanvas.DrawLine(17,17, 17,20, color);
 
+  LeftShoulderCanvas.DrawLine(16,2, 16,5, color);
 }
 
 void DrawWingFrame10()
@@ -1224,18 +1267,26 @@ void DrawWingFrame10()
   uint32_t color = 0xFF0000;
   RightShoulderCanvas.DrawLine(17,21, 19,21, color);
 
+  LeftShoulderCanvas.DrawRectangle(15, 0, 18, 3, color);
+  LeftShoulderCanvas.Fill(16, 2, color);
 }
 
 void DrawWingFrame11()
 {
   uint32_t color = 0xFF0000;
   RightShoulderCanvas.SetPixelAt(19,21, color);
+
+  LeftShoulderCanvas.SetPixelAt(17, 0, color);
+  LeftShoulderCanvas.SetPixelAt(18, 0, color);
 }
 
 void DrawWingFrame12()
 {
   uint32_t color = 0xFF0000;
   RightShoulderCanvas.DrawLine(17,17, 17,19, color);
+
+  LeftShoulderCanvas.SetPixelAt(16, 2, color);
+  LeftShoulderCanvas.SetPixelAt(16, 3, color);
 }
 
 void DrawWingFrame13()
@@ -1245,6 +1296,9 @@ void DrawWingFrame13()
   RightShoulderCanvas.SetPixelAt(19,15, color);
   RightShoulderCanvas.SetPixelAt(17,17,color);
   RightShoulderCanvas.SetPixelAt(17,18, color);
+
+  LeftShoulderCanvas.DrawRectangle(17, 6, 19, 8, color);
+  LeftShoulderCanvas.Fill(18, 7, color);
 }
 
 void DrawWingFrame14()
@@ -1252,6 +1306,12 @@ void DrawWingFrame14()
   uint32_t color = 0xFF0000;
   RightShoulderCanvas.DrawLine(17,16,19,10,color);
   RightShoulderCanvas.DrawRectangle(18,16,19,10,color);
+
+  LeftShoulderCanvas.DrawLine(13, 6, 18, 10, color);
+  LeftShoulderCanvas.DrawLine(13,6,17,10, color);
+  LeftShoulderCanvas.DrawLine(13,5,17,10, color);
+  LeftShoulderCanvas.DrawLine(13,6, 17, 8, color);
+
 }
 
 void DrawWingFrame15()
@@ -1260,6 +1320,10 @@ void DrawWingFrame15()
   RightShoulderCanvas.DrawCircle(8, 22, 16, color);
   RightShoulderCanvas.DrawCircle(9, 22, 16, color);
   RightShoulderCanvas.DrawCircle(10, 22, 16, color);
+
+  LeftShoulderCanvas.DrawCircle(8, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(9, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(10, 19,4, color);
 }
 
 void DrawWingFrame16()
@@ -1268,6 +1332,10 @@ void DrawWingFrame16()
   RightShoulderCanvas.DrawCircle(10, 22, 16, color);
   RightShoulderCanvas.DrawCircle(11, 22, 16, color);
   RightShoulderCanvas.DrawCircle(12, 22, 16, color);
+
+  LeftShoulderCanvas.DrawCircle(10, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(11, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(12, 19, 4, color);
 }
 
 void DrawWingFrame17()
@@ -1276,6 +1344,10 @@ void DrawWingFrame17()
   RightShoulderCanvas.DrawCircle(12, 22, 16, color);
   RightShoulderCanvas.DrawCircle(13, 22, 16, color);
   RightShoulderCanvas.DrawCircle(14, 22, 16, color);
+
+  LeftShoulderCanvas.DrawCircle(12, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(13, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(14, 19, 4, color);
 }
 
 void DrawWingFrame18()
@@ -1284,6 +1356,10 @@ void DrawWingFrame18()
   RightShoulderCanvas.DrawCircle(14, 22, 16, color);
   RightShoulderCanvas.DrawCircle(15, 22, 16, color);
   RightShoulderCanvas.DrawCircle(16, 22, 16, color);
+
+  LeftShoulderCanvas.DrawCircle(14, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(15, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(16, 19, 4, color);
 }
 
 void DrawWingFrame19()
@@ -1298,6 +1374,15 @@ void DrawWingFrame19()
   RightShoulderCanvas.DrawCircle(22, 22, 16, color);
   RightShoulderCanvas.DrawRectangle(0,0, 4,5, color);
   RightShoulderCanvas.Fill(2,2, color);
+
+  LeftShoulderCanvas.DrawCircle(16, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(17, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(18, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(19, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(20, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(21, 19, 4, color);
+  LeftShoulderCanvas.DrawRectangle(0, 20, 8, 24, color);
+  LeftShoulderCanvas.Fill(4, 22, color);
 }
 
 void DrawWingFrame20()
@@ -1308,6 +1393,13 @@ void DrawWingFrame20()
   RightShoulderCanvas.DrawCircle(24, 22, 16, color);
   RightShoulderCanvas.DrawCircle(25, 22, 16, color);
   RightShoulderCanvas.DrawCircle(26, 22, 16, color);
+
+
+  LeftShoulderCanvas.DrawCircle(22, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(23, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(24, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(25, 19, 4, color);
+  LeftShoulderCanvas.DrawCircle(26, 19, 4, color);
 }
 
 void DrawWingsFrames()
@@ -1402,6 +1494,7 @@ void DrawWingsFrames()
     }
 
     RightShoulderCanvas.MeanFilterByColor(3);
+    LeftShoulderCanvas.MeanFilterByColor(3);
     DrawAllMatrices();
     InitializeMatrices();
 
