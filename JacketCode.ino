@@ -66,6 +66,7 @@ int drawingMemory[ledsPerStrip*8];
 
 double curBrightness = 0;
 double maxBrightness = 1;
+double brightnessChangeVal = 0.1;
 
 const int config = WS2811_GRB | WS2811_800kHz;
 
@@ -434,6 +435,19 @@ uint32_t SetBrightness(uint32_t colorVal)
   b = b*curBrightness;
 }
 
+void IncrementBrightness()
+{
+  curBrightness += brightnessChangeVal;
+
+  if(curBrightness > maxBrightness) curBrightness = maxBrightness;
+}
+
+void DecrementBrightness()
+{
+  curBrightness -= brightnessChangeVal;
+
+  if(curBrightness < 0) curBrightness = 0;
+}
 
 
 void DrawLeftArmBackMatrix()
