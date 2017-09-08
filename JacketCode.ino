@@ -53,7 +53,7 @@
 #include "ShoulderLeftMap.h"
 #include "ShoulderRightMap.h"
 
-#define RELAY_PIN 4
+#define RELAY_PIN 0
 
 int turnSignals = 0;
 
@@ -67,10 +67,10 @@ DMAMEM int displayMemory[ledsPerStrip*8];
 int drawingMemory[ledsPerStrip*8];
 
 double curBrightness = 0;
-double maxBrightness = 1;
-double brightnessChangeVal = 0.1;
+double maxBrightness = 0.1;
+double brightnessChangeVal = 0.005;
 
-const int config = WS2811_GRB | WS2811_800kHz;
+const int config = WS2811_GRB | WS2813_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
 
@@ -378,7 +378,14 @@ void drawPlasma2(int frameCount) {
         {
           RightArmFrontPartTwoCanvas.SetPixelAt(x, y, value);
         }
- 
+        if(x < xSizeRightShoulder && y < ySizeRightShoulder)
+        {
+          RightShoulderCanvas.SetPixelAt(x,y, value);
+        }
+        if(x < xSizeLeftShoulder && y < ySizeLeftShoulder)
+        {
+          LeftShoulderCanvas.SetPixelAt(x,y, value);
+        }
       }
     }
     //DrawAllMatrices();
@@ -435,6 +442,10 @@ uint32_t SetBrightness(uint32_t colorVal)
   r = r*curBrightness;
   g = g*curBrightness;
   b = b*curBrightness;
+
+  uint32_t color = r << 16 | g << 8 | b;
+
+  return color;
 }
 
 void IncrementBrightness()
@@ -649,12 +660,12 @@ void DrawAllMatrices()
 
 void SetJacketOn()
 {
-  digitalWrite(RELAY_PIN, HIGH);
+  digitalWrite(RELAY_PIN, LOW);
 }
 
 void SetJacketOff()
 {
-  digitalWrite(RELAY_PIN, LOW);
+  digitalWrite(RELAY_PIN, HIGH);
 }
 
 void setup() {
@@ -914,7 +925,7 @@ void TurnRightNewShoulders(bool increment = true)
     RightShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
 
     plasmaState = 0;
-    drawPlasma2(masterFrame+=random(4,14));
+    drawPlasma2(masterFrame+=random(1,4));
 
     DrawAllMatrices();
 
@@ -962,7 +973,7 @@ void TurnLeftNewShoulders(bool increment = true)
     LeftShoulderCanvas.Fill((startX+endX)/2, (startY+endY)/2, color);
 
     plasmaState = 0;
-    drawPlasma2(masterFrame+=random(4,14));
+    drawPlasma2(masterFrame+=random(1,4));
 
     DrawAllMatrices();
 
@@ -1567,7 +1578,7 @@ void DrawWingsFrames()
 
     RightShoulderCanvas.MeanFilterByColor(3);
     LeftShoulderCanvas.MeanFilterByColor(3);
-    drawPlasma2(masterFrame+=random(4,14));
+    drawPlasma2(masterFrame+=random(1,4));
     DrawAllMatrices();
     InitializeMatrices();
 
@@ -1610,7 +1621,7 @@ void DrawWingsShoulders()
     for(int k = 0; k < loopVal; k++)
     {
       plasmaState = 0;
-      //drawPlasma2(masterFrame+=random(4,14));
+      //drawPlasma2(masterFrame+=random(1,4));
     
       DrawAllMatrices();
     }
@@ -1651,7 +1662,7 @@ void DrawWingsShoulders()
     for(int k = 0; k < loopVal; k++)
     {
       plasmaState = 0;
-      //drawPlasma2(masterFrame+=random(4,14));
+      //drawPlasma2(masterFrame+=random(1,4));
     
       DrawAllMatrices();
     }
@@ -1705,7 +1716,7 @@ void StopLightNewShoulders(bool increment = true)
     RightShoulderCanvas.Fill(5,5, colorValue);
 
     plasmaState = 1;
-    drawPlasma2(masterFrame+=random(4,14));
+    drawPlasma2(masterFrame+=random(1,4));
 
 
     DrawAllMatrices();
@@ -1729,7 +1740,7 @@ void StopLightNewShoulders(bool increment = true)
     RightShoulderCanvas.Fill(5,5, colorValue);
 
     plasmaState = 1;
-    drawPlasma2(masterFrame+=random(4,14));
+    drawPlasma2(masterFrame+=random(1,4));
 
     DrawAllMatrices();
 
@@ -1753,7 +1764,7 @@ void StopLightNewShoulders(bool increment = true)
     RightShoulderCanvas.Fill(5,5, colorValue);
 
     plasmaState = 1;
-    drawPlasma2(masterFrame+=random(4,14));
+    drawPlasma2(masterFrame+=random(1,4));
 
     DrawAllMatrices();
 
@@ -1761,9 +1772,8 @@ void StopLightNewShoulders(bool increment = true)
   }
 }
 
-void StopLight()
+void StopLight(bool increment = true)
 {
-
 
   for(int i = 0; i < 10; i++)
   {
@@ -1771,6 +1781,11 @@ void StopLight()
 
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
+
+    if(increment) 
+      IncrementBrightness();
+    else 
+      DecrementBrightness();
 
     LeftArmBackCanvas.Fill(5, 5, colorValue);      
     LeftArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
@@ -1782,6 +1797,8 @@ void StopLight()
     RightArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
     RightBackCanvas.Fill(5, 5, colorValue);             
     RightChestCanvas.Fill(5, 5, colorValue);
+    LeftShoulderCanvas.Fill(5, 5, colorValue);
+    RightShoulderCanvas.Fill(5,5, colorValue);
 
     DrawAllMatrices();
 
@@ -1797,6 +1814,11 @@ void StopLight()
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
 
+    if(increment) 
+      IncrementBrightness();
+    else 
+      DecrementBrightness();
+
     LeftArmBackCanvas.Fill(5, 5, colorValue);      
     LeftArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
     LeftArmFrontPartOneCanvas.Fill(5, 5, colorValue);   
@@ -1807,6 +1829,8 @@ void StopLight()
     RightArmFrontPartTwoCanvas.Fill(5, 5, colorValue);  
     RightBackCanvas.Fill(5, 5, colorValue);             
     RightChestCanvas.Fill(5, 5, colorValue);
+    LeftShoulderCanvas.Fill(5, 5, colorValue);
+    RightShoulderCanvas.Fill(5,5, colorValue);
 
     DrawAllMatrices();
 
@@ -1817,57 +1841,62 @@ void StopLight()
 }
 
 
+
+
 void loop() {
-  
-  InitializeMatrices();
-  for(int i = 0; i < 20; i++)
-  {
-    TurnRightNewShoulders();
-  }
-  
-  InitializeMatrices();
-  for(int i = 0; i < 20; i++)
-  {
-    TurnLeftNewShoulders();
-  }
-  
-  StopLightNewShoulders();  
 
+  Serial.println("1");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnRightNewShoulders();
   }
-  
+  Serial.println("2");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnLeftNewShoulders();
   }
   
-  StopLightNewShoulders();  
-
+  StopLight();  
+  Serial.println("3");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnRightNewShoulders();
   }
-  
+  Serial.println("4");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnLeftNewShoulders();
   }
   
-  StopLightNewShoulders(false);  
+  StopLight();  
+Serial.println("5");
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnRightNewShoulders();
+  }
+  Serial.println("6");
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnLeftNewShoulders();
+  }
+  
+  StopLight();  
 
 
 
   SetJacketOff();
 
-  delay(300000);
+  delay(5000);
 
   SetJacketOn();
+
+  delay(5000);
   
 }
 
