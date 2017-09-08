@@ -1774,10 +1774,10 @@ void StopLightNewShoulders(bool increment = true)
 
 void StopLight(bool increment = true)
 {
-
-  for(int i = 0; i < 10; i++)
+  int fadeFrames = 45;
+  for(int i = 0; i < fadeFrames; i++)
   {
-    int glowLevel = map(i, 0, 10, 0, 0x11);
+    int glowLevel = map(i, 0, fadeFrames, 0, 0xAA);
 
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
@@ -1809,9 +1809,9 @@ void StopLight(bool increment = true)
 
   delay(1000);
 
-  for(int i = 0; i < 10; i++)
+  for(int i = 0; i < fadeFrames; i++)
   {
-    int glowLevel = map(i, 10, 0, 0, 0x11);
+    int glowLevel = map(i, fadeFrames, 0, 0, 0xAA);
 
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
@@ -1849,47 +1849,49 @@ void StopLight(bool increment = true)
 
 void loop() {
 
-  Serial.println("1");
+  // Serial.println("1");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnRightNewShoulders();
   }
-  Serial.println("2");
+  // Serial.println("2");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnLeftNewShoulders();
   }
-  
+  Serial.println("GLOW1");
   StopLight();  
-  Serial.println("3");
+  // Serial.println("3");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnRightNewShoulders();
   }
-  Serial.println("4");
+  // Serial.println("4");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnLeftNewShoulders();
   }
   
-  StopLight();  
-Serial.println("5");
+  Serial.println("GLOW1");
+  StopLight(); 
+// Serial.println("5");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnRightNewShoulders();
   }
-  Serial.println("6");
+  // Serial.println("6");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnLeftNewShoulders();
   }
   
+  Serial.println("GLOW1");
   StopLight();  
 
 
