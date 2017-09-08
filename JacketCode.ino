@@ -1782,6 +1782,8 @@ void StopLight(bool increment = true)
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
 
+    Serial.println(glowLevel);
+
     if(increment) 
       IncrementBrightness();
     else 
@@ -1813,6 +1815,8 @@ void StopLight(bool increment = true)
 
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
+
+    Serial.println(glowLevel);
 
     if(increment) 
       IncrementBrightness();
@@ -1890,13 +1894,13 @@ Serial.println("5");
 
 
 
-  SetJacketOff();
-
-  delay(5000);
-
-  SetJacketOn();
-
-  delay(5000);
+  //SetJacketOff();
+//
+  //delay(5000);
+//
+  //SetJacketOn();
+//
+  //delay(5000);
   
 }
 
