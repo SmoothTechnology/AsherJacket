@@ -70,6 +70,10 @@ double curBrightness = 0;
 double maxBrightness = 0.1;
 double brightnessChangeVal = 0.005;
 
+double curShoulderBrightness = 0;
+double maxShoulderBrightness = 0.2;
+double shoulderBrightnessChangeVal = 0.01;
+
 const int config = WS2811_GRB | WS2813_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
@@ -448,18 +452,39 @@ uint32_t SetBrightness(uint32_t colorVal)
   return color;
 }
 
+uint32_t SetShoulderBrightness(uint32_t colorVal)
+{
+  int r = (colorVal >> 16) & 0xFF;
+  int g = (colorVal >> 8) & 0xFF;
+  int b = colorVal & 0xFF;
+
+  r = r*curShoulderBrightness;
+  g = g*curShoulderBrightness;
+  b = b*curShoulderBrightness;
+
+  uint32_t color = r << 16 | g << 8 | b;
+
+  return color;
+}
+
 void IncrementBrightness()
 {
   curBrightness += brightnessChangeVal;
+  curShoulderBrightness += shoulderBrightnessChangeVal;
 
   if(curBrightness > maxBrightness) curBrightness = maxBrightness;
+
+  if(curShoulderBrightness > maxShoulderBrightness) curShoulderBrightness = maxShoulderBrightness;
 }
 
 void DecrementBrightness()
 {
   curBrightness -= brightnessChangeVal;
+  curShoulderBrightness -= shoulderBrightnessChangeVal;
 
   if(curBrightness < 0) curBrightness = 0;
+
+  if(curShoulderBrightness < 0) curShoulderBrightness = 0;
 }
 
 
@@ -582,7 +607,7 @@ void DrawRightShoulderMatrix()
     {
       LEDPos curPos = RightShoulderMap[i - minLEDRightShoulder];
       int value = RightShoulderCanvas.GetValueAt(curPos.x, curPos.y);
-      value = SetBrightness(value);
+      value = SetShoulderBrightness(value);
       leds.setPixel(i, value);
     }
 
@@ -598,7 +623,7 @@ void DrawRightShoulderMatrix()
     {
       LEDPos curPos = RightShoulderMap[i - minLEDRightShoulder];
       int value = RightShoulderCanvas.GetValueAt(curPos.x, curPos.y);
-      value = SetBrightness(value);
+      value = SetShoulderBrightness(value);
       leds.setPixel(i, value);
     }
   }
@@ -613,7 +638,7 @@ void DrawLeftShoulderMatrix()
     {
       LEDPos curPos = LeftShoulderMap[i - minLEDLeftShoulder];
       int value = LeftShoulderCanvas.GetValueAt(curPos.x, curPos.y);
-      value = SetBrightness(value);
+      value = SetShoulderBrightness(value);
       leds.setPixel(i, value);
     }
 
@@ -629,7 +654,7 @@ void DrawLeftShoulderMatrix()
       {
         LEDPos curPos = LeftShoulderMap[i - minLEDLeftShoulder];
         int value = LeftShoulderCanvas.GetValueAt(curPos.x, curPos.y);
-        value = SetBrightness(value);
+        value = SetShoulderBrightness(value);
         leds.setPixel(i, value);
       }
   }
