@@ -71,7 +71,7 @@ double maxBrightness = 0.1;
 double brightnessChangeVal = 0.005;
 
 double curShoulderBrightness = 0;
-double maxShoulderBrightness = 0.2;
+double maxShoulderBrightness = .35;
 double shoulderBrightnessChangeVal = 0.01;
 
 const int config = WS2811_GRB | WS2813_800kHz;
@@ -1799,10 +1799,10 @@ void StopLightNewShoulders(bool increment = true)
 
 void StopLight(bool increment = true)
 {
-  int fadeFrames = 45;
+  int fadeFrames = 35;
   for(int i = 0; i < fadeFrames; i++)
   {
-    int glowLevel = map(i, 0, fadeFrames, 0, 0xAA);
+    int glowLevel = map(i, 0, fadeFrames, 0, 0x55);
 
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
@@ -1832,11 +1832,11 @@ void StopLight(bool increment = true)
     InitializeMatrices();
   }
 
-  delay(1000);
+  delay(1500);
 
   for(int i = 0; i < fadeFrames; i++)
   {
-    int glowLevel = map(i, fadeFrames, 0, 0, 0xAA);
+    int glowLevel = map(i, fadeFrames, 0, 0, 0x55);
 
     int colorValue = glowLevel << 16;
     colorValue = colorValue & 0xFF0000;
@@ -1874,60 +1874,62 @@ void StopLight(bool increment = true)
 
 void loop() {
 
-  // Serial.println("1");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnRightNewShoulders();
   }
-  // Serial.println("2");
-  InitializeMatrices();
-  for(int i = 0; i < 20; i++)
-  {
-    TurnLeftNewShoulders();
-  }
-  Serial.println("GLOW1");
-  StopLight();  
-  // Serial.println("3");
-  InitializeMatrices();
-  for(int i = 0; i < 20; i++)
-  {
-    TurnRightNewShoulders();
-  }
-  // Serial.println("4");
+  
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnLeftNewShoulders();
   }
   
-  Serial.println("GLOW1");
-  StopLight(); 
-// Serial.println("5");
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnRightNewShoulders();
   }
-  // Serial.println("6");
+  
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
   {
     TurnLeftNewShoulders();
   }
   
-  Serial.println("GLOW1");
-  StopLight();  
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnRightNewShoulders();
+  }
 
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnRightNewShoulders();
+  }
 
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnRightNewShoulders();
+  }
 
-  //SetJacketOff();
-//
-  //delay(5000);
-//
-  //SetJacketOn();
-//
-  //delay(5000);
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnLeftNewShoulders(false);
+  }
+  
+
+  Serial.println("jacket off");
+  // SetJacketOff();
+
+  // delay(300000);
+
+  Serial.println("jacket ON");
+  // SetJacketOn();
   
 }
 
