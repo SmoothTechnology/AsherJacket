@@ -1717,6 +1717,11 @@ void StopLightNewShoulders(bool increment = true)
 
   while(millis() - startTime < 4000)
   {
+    if(increment) 
+      IncrementBrightness();
+    else 
+      DecrementBrightness();
+
     int colorValue = 0xFF << 16;
     colorValue = colorValue & 0xFF0000;
 
@@ -1733,6 +1738,12 @@ void StopLightNewShoulders(bool increment = true)
 
   for(int i = 0; i < 10; i++)
   {
+
+    if(increment) 
+      IncrementBrightness();
+    else 
+      DecrementBrightness();
+    
     int glowLevel = map(i, 10, 0, 0, 0xFF);
 
     int colorValue = glowLevel << 16;
