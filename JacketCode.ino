@@ -53,6 +53,8 @@
 #include "ShoulderLeftMap.h"
 #include "ShoulderRightMap.h"
 
+#define RELAY_PIN 4
+
 int turnSignals = 0;
 
 int plasmaState = 0;
@@ -645,7 +647,21 @@ void DrawAllMatrices()
   leds.show();
 }
 
+void SetJacketOn()
+{
+  digitalWrite(RELAY_PIN, HIGH);
+}
+
+void SetJacketOff()
+{
+  digitalWrite(RELAY_PIN, LOW);
+}
+
 void setup() {
+
+  pinMode(RELAY_PIN, OUTPUT);
+  
+
   Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
   leds.begin();
   leds.show();
@@ -859,7 +875,7 @@ void TurnRight()
   }
 }
 
-void TurnRightNewShoulders()
+void TurnRightNewShoulders(bool increment = true)
 {
   turnSignals = 1;
   int maxFrames = 10;
@@ -870,6 +886,12 @@ void TurnRightNewShoulders()
 
   for(int i = 0; i < maxFrames; i++)
   { 
+
+    if(increment) 
+      IncrementBrightness();
+    else 
+      DecrementBrightness();
+
     int xDrawStart = startX - i*2;
     int yDrawStart = startY - i*2;
     int xDrawEnd = endX + i*2;
@@ -901,7 +923,7 @@ void TurnRightNewShoulders()
   turnSignals= 0;
 }
 
-void TurnLeftNewShoulders()
+void TurnLeftNewShoulders(bool increment = true)
 {
   turnSignals = 1;
   int maxFrames = 10;
@@ -912,6 +934,12 @@ void TurnLeftNewShoulders()
 
   for(int i = 0; i < maxFrames; i++)
   { 
+
+    if(increment) 
+      IncrementBrightness();
+    else 
+      DecrementBrightness();
+
     int xDrawStart = startX - i*2;
     int yDrawStart = startY - i*2;
     int xDrawEnd = endX + i*2;
@@ -1658,11 +1686,16 @@ void LightUpAllCanvases()
   DrawAllMatrices();
 }
 
-void StopLightNewShoulders()
+void StopLightNewShoulders(bool increment = true)
 {
 
   for(int i = 0; i < 10; i++)
   {
+    if(increment) 
+      IncrementBrightness();
+    else 
+      DecrementBrightness();
+
     int glowLevel = map(i, 0, 10, 0, 0xFF);
 
     int colorValue = glowLevel << 16;
@@ -1774,44 +1807,6 @@ void StopLight()
 
 
 void loop() {
-  //DrawWings();
-  
-  //LightUpAllCanvases();
-
- //for(int i = 0; i < 4; i++)
- //{
- //  CenterOut();
- //}
- //InitializeMatrices();
- //
- //for(int i = 0; i < 4; i++)
- //{
- //  TurnRight();
- //}
- //InitializeMatrices();
- //
- //for(int i = 0; i < 4; i++)
- //{
- //  TurnLeft();
- //}
- //InitializeMatrices();
- //
- //for(int i = 0; i < 4; i++)
- //{
- //  DrawWings();
- //}
- //InitializeMatrices();
- //
- //StopLight();
- //InitializeMatrices();
-
-
-
-
-
-
-
-
   
   InitializeMatrices();
   for(int i = 0; i < 20; i++)
@@ -1828,37 +1823,40 @@ void loop() {
   StopLightNewShoulders();  
 
   InitializeMatrices();
-  //for(int i = 0; i < 5; i++)
-  //{
-  //  DrawWingsShoulders();
-  //}
+  for(int i = 0; i < 20; i++)
+  {
+    TurnRightNewShoulders();
+  }
   
-  //for(int i = 0; i < 10; i++)
-  //{
-  //  DrawWingsFrames();
-  //}
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnLeftNewShoulders();
+  }
   
+  StopLightNewShoulders();  
+
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnRightNewShoulders();
+  }
+  
+  InitializeMatrices();
+  for(int i = 0; i < 20; i++)
+  {
+    TurnLeftNewShoulders();
+  }
+  
+  StopLightNewShoulders(false);  
 
 
 
+  SetJacketOff();
 
+  delay(300000);
 
-  //for(int i = 0; i < 10; i++)
-  //{
-  //  DrawWingsBezier();
-  //}
-//
-  //StopLightNewShoulders();
-
-
-  //DrawWings();
-  //drawPlasma2(frames++);
-
-  //for(int i = 0 ; i < 255; i++)
-  //{
-  //  LeftChestCanvas.Fill(5, 5, Wheel(i));
-  //  DrawAllMatrices();
-  //}
+  SetJacketOn();
   
 }
 
