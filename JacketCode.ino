@@ -64,6 +64,9 @@ const int ledsPerStrip = 1280;
 DMAMEM int displayMemory[ledsPerStrip*8];
 int drawingMemory[ledsPerStrip*8];
 
+double curBrightness = 0;
+double maxBrightness = 1;
+
 const int config = WS2811_GRB | WS2811_800kHz;
 
 OctoWS2811 leds(ledsPerStrip, displayMemory, drawingMemory, config);
@@ -420,12 +423,26 @@ void InitializeAllMaps()
   InitializeLeftShoulderMap();
 }
 
+uint32_t SetBrightness(uint32_t colorVal)
+{
+  int r = (colorVal >> 16) & 0xFF;
+  int g = (colorVal >> 8) & 0xFF;
+  int b = colorVal & 0xFF;
+
+  r = r*curBrightness;
+  g = g*curBrightness;
+  b = b*curBrightness;
+}
+
+
+
 void DrawLeftArmBackMatrix()
 {
   for(int i = minLEDLeftArmBack; i < maxLEDLeftArmBack+1; i++)
   {
     LEDPos curPos = LeftArmBackMap[i - minLEDLeftArmBack];
     int value = LeftArmBackCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -436,6 +453,7 @@ void DrawLeftArmFrontPartTwoMatrix()
   {
     LEDPos curPos = LeftArmPartTwoMap[i - minLEDLeftArmPartTwo];
     int value = LeftArmFrontPartTwoCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -446,6 +464,7 @@ void DrawLeftArmFrontPartOneMatrix()
   {
     LEDPos curPos = LeftArmPartOneMap[i - minLEDLeftArmFrontPartOne];
     int value = LeftArmFrontPartOneCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -456,6 +475,7 @@ void DrawLeftBackMatrix()
   {
     LEDPos curPos = LeftBackMap[i - minLEDLeftBack];
     int value = LeftBackCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -467,6 +487,7 @@ void DrawLeftChestMatrix()
   {
     LEDPos curPos = LeftChestMap[i - minLEDLeftChest];
     int value = LeftChestCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -477,6 +498,7 @@ void DrawRightArmBackMatrix()
   {
     LEDPos curPos = RightArmBackMap[i - minLEDRightArmBack];
     int value = RightArmBackCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -487,6 +509,7 @@ void DrawRightArmFrontPartOneMatrix()
   {
     LEDPos curPos = RightArmPartOneMap[i - minLEDRightArmPartOne];
     int value = RightArmFrontPartOneCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -497,6 +520,7 @@ void DrawRightArmFrontPartTwoMatrix()
   {
     LEDPos curPos = RightArmPartTwoMap[i - minLEDRightArmPartTwo];
     int value = RightArmFrontPartTwoCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -507,6 +531,7 @@ void DrawRightBackMatrix()
   {
     LEDPos curPos = RightBackMap[i - minLEDRightBack];
     int value = RightBackCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -517,6 +542,7 @@ void DrawRightChestMatrix()
   {
     LEDPos curPos = RightChestMap[i - minLEDRightChest];
     int value = RightChestCanvas.GetValueAt(curPos.x, curPos.y);
+    value = SetBrightness(value);
     leds.setPixel(i, value);
   }
 }
@@ -529,6 +555,7 @@ void DrawRightShoulderMatrix()
     {
       LEDPos curPos = RightShoulderMap[i - minLEDRightShoulder];
       int value = RightShoulderCanvas.GetValueAt(curPos.x, curPos.y);
+      value = SetBrightness(value);
       leds.setPixel(i, value);
     }
 
@@ -544,6 +571,7 @@ void DrawRightShoulderMatrix()
     {
       LEDPos curPos = RightShoulderMap[i - minLEDRightShoulder];
       int value = RightShoulderCanvas.GetValueAt(curPos.x, curPos.y);
+      value = SetBrightness(value);
       leds.setPixel(i, value);
     }
   }
@@ -558,6 +586,7 @@ void DrawLeftShoulderMatrix()
     {
       LEDPos curPos = LeftShoulderMap[i - minLEDLeftShoulder];
       int value = LeftShoulderCanvas.GetValueAt(curPos.x, curPos.y);
+      value = SetBrightness(value);
       leds.setPixel(i, value);
     }
 
@@ -573,6 +602,7 @@ void DrawLeftShoulderMatrix()
       {
         LEDPos curPos = LeftShoulderMap[i - minLEDLeftShoulder];
         int value = LeftShoulderCanvas.GetValueAt(curPos.x, curPos.y);
+        value = SetBrightness(value);
         leds.setPixel(i, value);
       }
   }
@@ -1789,10 +1819,10 @@ void loop() {
   //  DrawWingsShoulders();
   //}
   
-  for(int i = 0; i < 10; i++)
-  {
-    DrawWingsFrames();
-  }
+  //for(int i = 0; i < 10; i++)
+  //{
+  //  DrawWingsFrames();
+  //}
   
 
 
